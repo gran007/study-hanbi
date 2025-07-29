@@ -1,3 +1,4 @@
+
 const getElement = (item) => {
     switch (item.type) {
         case "header":
@@ -15,133 +16,101 @@ const getElement = (item) => {
         case "conceptImage":
             return createConcepImage(item);
         default:
-            return createElement("div");
+            return ``;
     }
 
-}
-
-const createElement = (elementType, className, text) => {
-    const element = document.createElement(elementType);
-    if (className) {
-        element.setAttribute('class', className);
-    }
-    if (text) {
-        element.innerText = text;
-    }
-    return element;
 }
 
 const createHeader = ({ date, title }) => {
-    const header = createElement('header', 'main-header');
-    header.append(createElement('div', 'date-time', date));
 
-    const h1 = createElement('h1', 'program-title');
-    h1.append(createElement('span', 'title-main', title.main));
-    h1.append(createElement('span', 'title-main', title.sub));
-
-    header.append(h1);
-    return header;
+    return `<header class="main-header">
+            <div class="date-time">${date}</div>
+            <h1 class="program-title">
+                <span class="title-main">${title.main}</span>
+                <span class="title-sub">${title.sub}</span>
+            </h1>
+        </header>`
 }
 
 const createProgramSelectionTable = ({ header, body }) => {
-    const table = createElement('table', 'schedule-table');
-    const thead = createElement('thead');
-    const tr = createElement('tr');
-    header.forEach((text) => {
-        tr.append(createElement('th', undefined, text));
-    });
-    thead.append(tr);
-    table.append(thead);
 
-    const tbody = createElement('tbody');
-    body.forEach((data) => {
-        const trForTbody = createElement('tr');
-        data.forEach((text) => {
-            trForTbody.append(createElement('td', undefined, text));
-        });
-        tbody.append(trForTbody);
-    })
-    table.append(tbody);
+    const table = `
+    <table class="schedule-table">
+        <thead>
+        <tr>
+            ${header.map((text) => `<th>${text}</th>`).join('')}
+        </tr>
+        </thead>
+        <tbody>
+            ${body.map((data) => `<tr>${data.map((text) => `<td>${text}</td>`).join('')}</tr>`).join('')}
+        </tbody>
+    </table>`
     return table;
 }
 
 const createSectionTitle = ({ name, subTitle }) => {
-    const h2 = createElement('h2', 'section-title');
-    h2.append(createElement('span', 'session-name', name));
-    if (subTitle) {
-        h2.append(createElement('span', 'session-subtitle', subTitle));
-    }
-    return h2;
+    return `<h2 class="section-title">
+                <span class="session-name">${name}</span>
+                ${subTitle ? `<span class="session-subtitle">${subTitle}</span>` : ''}
+            </h2>`;
 }
 
 const createGrid = ({ header, sectionHeader, content, footer }) => {
-    const grid = createElement('div', 'operation-grid');
-
-    const girdCell = createElement('div', 'grid-cell grid-header');
-    header.forEach(({ title, desc }) => {
-        girdCell.append(createElement('h4', undefined, title));
-        girdCell.append(createElement('div', 'content-item', desc));
-    });
-    grid.append(girdCell);
-    grid.append(createElement('div', 'grid-cell section-header', sectionHeader));
-
-    content.forEach((contents) => {
-        const content = createElement('div', 'grid-cell grid-content');
-        contents.forEach(({ title, items }) => {
-            content.append(createElement('h4', undefined, title));
-            items.forEach((text) => {
-                content.append(createElement('div', 'content-item', text));
-            })
-        });
-        grid.append(content);
-    });
-
-    footer.forEach((footerText) => {
-        grid.append(createElement('div', 'grid-cell grid-footer', footerText));
-    })
-
-    return grid;
+    return `
+        <div class="operation-grid">
+                <div class="grid-cell grid-header">
+                ${header.map(({title, desc})=>`
+                    <h4>${title}</h4>
+                        <div class="content-item">${desc}</div>
+                `).join('')}
+                </div>
+                <div class="grid-cell section-header">${sectionHeader}</div>
+                ${content.map((contents)=>`
+                    <div class="grid-cell grid-content">
+                        ${contents.map(({title, items})=>`
+                        <h4>${title}</h4>
+                        ${items.map((text)=>`<div class="content-item">${text}</div>`).join('')}
+                        `).join('')}
+                    </div>`
+                ).join('')}
+                ${footer.map((footerText)=>`<div class="grid-cell grid-footer">${footerText}</div>`).join('')}
+                </div>
+    `
 }
 
 
 const createInfoBlock = ({ title, contentBox }) => {
-    const article = createElement('div', 'info-block philosophy-block');
-    article.append(createElement('h3', 'block-title', title));
-    const div = createElement('div', 'content-box');
-    contentBox.forEach((item) => {
-        div.append(createElement('div', 'content-item', item));
-    })
-    article.append(div);
-    return article;
+    return `
+        <div class="info-block philosophy-block">
+            <h3 class="block-title">${title}</h3>
+            <div class="content-box">
+                ${contentBox.map((item)=>`<div class="content-item">${item}</div>`).join('')}
+            </div>
+        </div>
+    `
 }
 
 const createWorkshopBlock = ({ blockTitle, conceptTitle, image, example }) => {
-    const article = createElement('div', 'info-block workshop-block');
-    article.append(createElement('h3', 'block-title', blockTitle));
-    article.append(createElement('h4', 'concept-title', conceptTitle));
-    if (image) {
-        const img = createElement('img', 'concept-image');
-        img.setAttribute('src', image.url);
-        img.setAttribute('alt', image.alt);
-        article.append(img);
-    }
-    if(example) {
-        example.forEach(({title, code}, index)=> {
-            article.append(createElement('h5', 'example-title', title));
-            article.append(createElement('pre', `code-example ${index === 0? 'top' : ''}`, code));
-        })
-    }
-
-    return article;
+    return `
+        <div class="info-block workshop-block">
+            <h3 class="block-title">${blockTitle}</h3>
+            <h4 class="concept-title">${conceptTitle}</h4>
+            ${image ? `<img class="concept-image" src="${image.url}" alt="${image.alt}">` : ''}
+            ${example ? example.map(({title, code}, index)=>`
+            <h5 class="example-title">${title}</h5>
+            <pre class="code-example" ${index === 0 ? 'top' : ''}>${code}</pre>
+            `).join('') : ''}
+        </div>
+    `
 };
 
 const createConcepImage = ({ image }) => {
-    const article = createElement('div', 'info-block');
-    const img = createElement('img', 'concept-image');
-    img.setAttribute('src', image.url);
-    img.setAttribute('alt', image.alt);
-    article.append(img);
-    return article;
+    const { url, alt } = image;
+    return `
+        <div class="info-block">
+            <img class="concept-image" src="${url}" alt="${alt}">
+        </div>
+    `
 }
 
 window.addEventListener("DOMContentLoaded", (event) => {
@@ -153,10 +122,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
         return response.json(); // JSON 데이터로 파싱
     })
         .then(data => {
-            const main = document.querySelector("#main");
-            data["body"].forEach((item) => {
-                main.append(getElement(item));
-            });
+            document.querySelector("#main").innerHTML =
+                data["body"].map((item) => getElement(item)).join('');
         })
         .catch(error => {
             console.error('Error fetching data:', error);

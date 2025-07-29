@@ -3,6 +3,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --anime-normal: cubic-bezier(.4,0,.2,1);
+  --anime-rapid: cubic-bezier(.64,0,.49,1);
 }
 
 @theme inline {
