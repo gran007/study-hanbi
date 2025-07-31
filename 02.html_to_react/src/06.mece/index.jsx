@@ -1,6 +1,6 @@
 const MECE = () => {
   return (
-    <article className="info-block workshop-block">
+    <article className="info-block">
       <h3 className="block-title">MECE 소개</h3>
       <h4 className="concept-title">가로 노드는 겹치지 않게, 부모 노드는 자식 노드의 요약</h4>
       <div className="example-section">

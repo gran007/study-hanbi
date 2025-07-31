@@ -103,7 +103,7 @@ const WorkShop = () => {
         <h4 className="concept-title">{conceptTitle}</h4>
         {
           example.map(({ title, code }, exampleIndex) => (
-            <div key={exampleIndex} className='example-code'>
+            <div key={exampleIndex}>
               <h5 className="example-title">{title}</h5>
               <pre className={`code-example ${exampleIndex === 0 ? 'top' : ''}`}>
                 <code>{code}</code>
