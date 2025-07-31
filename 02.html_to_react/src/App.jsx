@@ -12,8 +12,8 @@ function App() {
   return (
     <main className='container'>
       <Header />
-      <SectionTitle name={"1. 클럽 소개"} />
       <TimeTable />
+      <SectionTitle name={"1. 클럽 소개"} />
       <OperationLayout />
       <InfoBlock />
       <SectionTitle name={"2. 미니 워크숍"} subTitle={"개발자들이여 보라!"} />
