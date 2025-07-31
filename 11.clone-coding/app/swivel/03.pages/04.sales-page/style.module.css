@@ -1,0 +1,230 @@
+.section {
+    width: 100%;
+    background-color: var(--color-white);
+    padding: calc(.25rem * 12);
+    overflow: hidden;
+}
+
+.pageBody {
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: calc(.25rem * 4);
+}
+
+.titleSection {
+    text-align: center;
+    margin-bottom: calc(.25rem * 8);
+}
+
+.title {
+    font-size: var(--text-2xl);
+    line-height: var(--text-2xl--line-height);
+    font-weight: 900;
+    color: var(--text-gray-900);
+    margin-bottom: calc(.25rem * 4);
+    padding-inline: calc(.25rem * 2);
+}
+
+.row {
+    margin-bottom: calc(.25rem * 12);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: calc(.25rem * 8);
+    align-items: center;
+}
+
+.gridLeft {
+    order: 2;
+}
+
+.gridTitle {
+    font-size: var(--text-2xl);
+    line-height: var(--text-2xl--line-height);
+    font-weight: bold;
+    color: var(--color-gray-900);
+    margin-bottom: calc(var(--spacing) * 4);
+}
+
+.gridDesc>*:not(:last-child) {
+    margin-bottom: calc(var(--spacing) * 3);
+}
+
+.desc {
+    font-size: var(--text-sm);
+    line-height: var(--text-sm--line-height);
+    color: var(--color-gray-700);
+    line-height: (1.625);
+}
+
+.gridRight {
+    order: 1;
+}
+
+.card {
+    border-radius: var(--radius-2xl);
+    padding: calc(var(--spacing) * 4);
+    box-shadow: 0 10px 15px -3px, #0000001a, 0 4px 6px -4px, #0000001a;
+}
+
+.card1 {
+    background-image: linear-gradient(to bottom right in oklab, var(--color-blue-50) 0%, var(--color-purple-50) 100%);
+}
+
+.card2 {
+    background-image: linear-gradient(to bottom right in oklab, var(--color-purple-50) 0%, var(--color-pink-50) 100%);
+}
+
+.card3 {
+    background-image: linear-gradient(to bottom right in oklab, var(--color-green-50) 0%, var(--color-blue-50) 100%);
+}
+
+.cardContentSection {
+    width: 100%;
+    height: calc(var(--spacing) * 48);
+    border-radius: var(--radius-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card1 > .cardContentSection {
+    background-image: linear-gradient(to bottom right in oklab, var(--color-blue-400) 0%, var(--color-purple-500) 100%);
+}
+
+.card2 > .cardContentSection {
+    background-image: linear-gradient(to bottom right in oklab, var(--color-purple-400) 0%, var(--color-pink-500) 100%);
+}
+
+.card3 > .cardContentSection {
+    background-image: linear-gradient(to bottom right in oklab, var(--color-green-400) 0%, var(--color-blue-500) 100%);
+}
+
+.cardContent {
+    text-align: center;
+    color: white;
+}
+
+.svg {
+    width: calc(var(--spacing) * 12);
+    height: calc(var(--spacing) * 12);
+    margin-inline: auto;
+    margin-bottom: calc(var(--spacing) * 2);
+}
+
+.cardTitle {
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+    font-weight: 600;
+}
+
+.cardDesc {
+    font-size: var(--text-xs);
+    line-height: var(--text-xs--line-height);
+    opacity: .9;
+}
+
+/* sm */
+@media screen and (min-width: 40rem) {
+    .pageBody {
+        padding-inline: calc(.25rem * 6);
+    }
+
+    .title {
+        font-size: var(--text-3xl);
+        line-height: var(--text-3xl--line-height);
+    }
+
+    .desc {
+        font-size: var(--text-base);
+        line-height: var(--text-base--line-height);
+    }
+}
+
+/* md */
+@media screen and (min-width: 48rem) {
+    .section {
+        width: 100%;
+        background-color: var(--color-white);
+        padding: calc(.25rem * 20);
+    }
+
+    .titleSection {
+        margin-bottom: calc(.25rem * 16);
+    }
+
+    .title {
+        font-size: var(--text-4xl);
+        line-height: var(--text-4xl--line-height);
+    }
+
+    .row {
+        margin-bottom: calc(.25rem * 20);
+    }
+
+    .grid {
+        gap: calc(.25rem * 12);
+    }
+
+    .gridTitle {
+        font-size: var(--text-3xl);
+        line-height: var(--text-3xl--line-height);
+        margin-bottom: calc(var(--spacing) * 6);
+    }
+
+    .gridDesc>*:not(:last-child) {
+        margin-bottom: calc(var(--spacing) * 4);
+    }
+
+    .desc {
+        font-size: var(--text-lg);
+        line-height: var(--text-lg--line-height);
+    }
+
+    .card {
+        border-radius: var(--radius-3xl);
+        padding: calc(var(--spacing) * 8)
+    }
+
+    .cardContentSection {
+        height: calc(var(--spacing) * 64);
+        border-radius: var(--radius-2xl);
+    }
+
+    .svg {
+        width: calc(var(--spacing) * 16);
+        height: calc(var(--spacing) * 16);
+        margin-bottom: calc(var(--spacing) * 4);
+    }
+
+    .cardTitle {
+        font-size: var(--text-lg);
+        line-height: var(--text-lg--line-height);
+    }
+
+    .cardDesc {
+        font-size: var(--text-sm);
+        line-height: var(--text-sm--line-height);
+    }
+}
+
+/* lg */
+@media screen and (min-width: 64rem) {
+    .pageBody {
+        padding-inline: calc(.25rem * 8);
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gridLeft {
+        order: 1;
+    }
+
+    .gridRight {
+        order: 2;
+    }
+}

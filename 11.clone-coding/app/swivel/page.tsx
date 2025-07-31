@@ -3,7 +3,7 @@
 import style from './style.module.css';
 import Header from './01.header';
 import Modal from './02.modal';
-import { FirstPage, CardPage } from './03.pages';
+import { FirstPage, CardPage, NoticePage, SalesPage, WhyPage } from './03.pages';
 import { useState } from 'react';
 
 export default function Swivel() {
@@ -16,6 +16,9 @@ export default function Swivel() {
             <Modal show={showModal} setShow={setShowModal} />
             <FirstPage />
             <CardPage />
+            <NoticePage />
+            <SalesPage />
+            <WhyPage />
         </div>
     );
 }

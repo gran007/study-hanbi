@@ -1,7 +1,7 @@
 'use client';
 
 import style from './style.module.css';
-import Animated from '@/app/swivel/05.components/animated';
+import { Animated } from '@/app/swivel/05.components';
 
 const GoogleIcon = () => {
     return (
@@ -30,9 +30,9 @@ const Video = () => {
 }
 
 const VideoPage = () => {
-    
+
     return (
-        <Animated showStyle={style.show}>
+        <Animated className={style.show}>
             <section className={style.videoSection}>
                 <Video />
                 <div className={style.videoPage}>

@@ -1,5 +1,5 @@
 .cardSection {
-    height: 100vh;
+    height: 100%;
     background-image: linear-gradient(to bottom right in oklab, var(--color-gray-50)0%, var(--color-blue-50)100%);
     padding-block: calc(0.25rem * 20);
     overflow: hidden;
@@ -60,7 +60,7 @@
     transform-style: preserve-3d;
 }
 
-.card3 {
+.cardSurface {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -83,6 +83,208 @@
     background-image: linear-gradient(to bottom right in oklab, var(--color-blue-600)0%, var(--color-purple-600)50%, var(--color-indigo-800)100%);
 }
 
+.cardView {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+}
+
+.cardImg {
+    width: calc(.25rem * 12);
+    height: calc(.25rem * 12);
+    background-color: color-mix(in oklab, var(--color-white) 20%, transparent);
+    backdrop-filter: blur(8px);
+    border-radius: .75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: calc(.25rem * 4);
+}
+
+.imgSvg {
+    width: calc(.25rem * 8);
+    height: calc(.25rem * 8);
+    color: white;
+}
+
+.company {
+    font-size: .875rem;
+    font-weight: 600;
+    line-height: calc(1.25/.875);
+    color: color-mix(in oklab, var(--color-white) 80%, transparent);
+    margin-bottom: .25rem;
+}
+
+.name {
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-bottom: calc(.25rem * 2);
+    line-height: calc(2/1.5);
+}
+
+.rank {
+    font-size: 1.125rem;
+    color: var(--color-blue-200);
+    margin-bottom: calc(.25rem * 4);
+    opacity: .8;
+    line-height: calc(1.75/1.1.25);
+}
+
+.contact {
+    font-size: .875rem;
+    line-height: calc(1.25/.875);
+}
+
+.contactDetail {
+    display: flex;
+    align-items: center;
+}
+
+.contactDetail>*:not(:last-child) {
+    margin-right: calc(.25rem * 2);
+}
+
+.smallImg {
+    width: calc(.25rem * 4);
+    height: calc(.25rem * 4);
+    color: cacl(--color-blue-200);
+}
+
+.contactText {
+    color: color-mix(in oklab, var(--color-white) 90%, transparent);
+}
+
+.cardSurface:not(.cardBack) {
+    display: none;
+    transform: rotateY('180deg');
+}
+
+.cardBack {
+    /* display: none; */
+    /* transform: rotateY('180deg'); */
+}
+
+.cardBackInner {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom right in oklab, var(--color-gray-800)0%, var(--color-gray-900)50%, var(--color-black)100%);
+    color: white;
+    padding: calc(.25rem * 6);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.cardBackView {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.qrCode {
+    width: calc(.25rem * 32);
+    height: calc(.25rem * 32);
+    background-color: white;
+    border-radius: 1rem;
+    padding: calc(.25rem * 4);
+    margin-bottom: calc(.25rem * 4);
+    ;
+    box-shadow: 0 20px 25px -5px #0000001a, 0 8px 10px -6px #0000001a;
+}
+
+.qrGridContainer {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    border-radius: .5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.qrGrid {
+    display: grid;
+    grid-template-rows: repeat(8, minmax(0, 1fr));
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: calc(.25rem * .5);
+    height: 100%;
+    padding: .25rem;
+}
+
+.qrItem {
+    border-radius: .25rem;
+    background-color: white;
+}
+
+.qrItem.black {
+    background-color: black;
+}
+
+.instruction {
+    text-align: center;
+    font-size: .875rem;
+    line-height: calc(1.25/.875);
+    color: var(--color-gray-300);
+    margin-bottom: calc(.25rem * 2);
+    opacity: .8;
+}
+
+.recommend {
+    text-align: center;
+    font-size: .75rem;
+    line-height: calc(1/.75);
+    color: var(--color-gray-400);
+    opacity: .6;
+}
+
+.homepageAddress {
+    font-size: .75rem;
+    line-height: calc(1/.75);
+    color: var(--color-gray-400);
+    margin-bottom: calc(.25rem * 2);
+}
+
+.moreInfo {
+    text-align: center;
+    margin-top: calc(.25rem * 12);
+}
+
+.tip {
+    font-size: .875rem;
+    line-height: calc(1.25/.875);
+    color: var(--color-gray-500);
+    margin-bottom: calc(.25rem * 6);
+}
+
+.scrollButton {
+    display: inline-flex;
+    align-items: center;
+    background-image: linear-gradient(to bottom right in oklab, var(--color-blue-600) 0%, var(--color-blue-700) 100%);
+    color: white;
+    font-weight: 900;
+    border-radius: 1rem;
+    transition: all .3s ease;
+    box-shadow: 10px 15px -3px #0000001a, 0 4px 6px -4px #0000001a;
+    padding-inline: calc(.25rem * 8);
+    padding-block: calc(.25rem * 3);
+    cursor: pointer;
+}
+
+.scrollButton:hover {
+    background-image: linear-gradient(to bottom right in oklab, var(--color-blue-700) 0%, var(--color-blue-800) 100%);
+    box-shadow: 0px 20px 25px -25px #0000001a, 0 8px 10px -6px #0000001a;
+}
+
+.scrollButtonSvg {
+    width: calc(.25rem * 5);
+    height: calc(.25rem * 5);
+    margin-right: calc(.25rem * 2);
+}
+
 /* sm */
 @media screen and (min-width: 40rem) {
     .cardPage {
@@ -95,7 +297,7 @@
 }
 
 /* md */
-@media screen and (min-width: 48px) {
+@media screen and (min-width: 48rem) {
     .title {
         font-size: 2.25rem;
     }
@@ -107,7 +309,7 @@
 }
 
 /* lg */
-@media screen and (min-width: 64px) {
+@media screen and (min-width: 64rem) {
     .cardPage {
         padding-inline: calc(0.25rem * 8);
     }

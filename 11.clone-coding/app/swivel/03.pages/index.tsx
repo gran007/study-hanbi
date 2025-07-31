@@ -1,2 +1,5 @@
 export { default as FirstPage } from './01.video-page'
 export { default as CardPage } from './02.card-page'
+export { default as NoticePage } from './03.notice-page'
+export { default as SalesPage } from './04.sales-page'
+export { default as WhyPage } from './05.why-page'

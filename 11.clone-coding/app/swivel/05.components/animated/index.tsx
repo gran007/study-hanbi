@@ -2,10 +2,10 @@ import { PropsWithChildren, useEffect, useRef, useState } from 'react';
 import { checkIsInViewport } from '@/app/swivel/04.util';
 
 type AnimatedProps = {
-    showStyle: Object,
+    className: Object | undefined,
 }
 
-function Animated ({ children, showStyle={} }: PropsWithChildren<AnimatedProps>) {
+function Animated ({ children, className={} }: PropsWithChildren<AnimatedProps>) {
     const [show, setShow] = useState(false);
     const areaRef = useRef<HTMLDivElement>(null);
 
@@ -27,7 +27,7 @@ function Animated ({ children, showStyle={} }: PropsWithChildren<AnimatedProps>)
 
     return (
         <div ref={areaRef} 
-            className={`${show ? showStyle : {}}`}>
+            className={`${show ? className : {}}`}>
             {children}
         </div>
     )
