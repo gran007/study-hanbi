@@ -14,6 +14,14 @@
 .titleSection {
     text-align: center;
     margin-bottom: calc(0.25rem * 16);
+    opacity: 0;
+    transition: all .6s ease-in-out;
+    transform: translateY(2rem);
+}
+
+.show .titleSection {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .title {
@@ -38,12 +46,26 @@
     display: flex;
     justify-content: center;
     position: relative;
+    transition: all .8s ease-in-out;
+    opacity: 0;
+    transform: translateY(2rem) scale(0.9);
+}
+
+.show .cardContainer {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.card:hover {
+    transform: scale(1.05);
 }
 
 .card {
     width: calc(0.25rem * 80);
     height: calc(0.25rem * 48);
     position: relative;
+    transition: all .2s ease-in-out;
+    transform: scale(1);
 }
 
 .card1 {
@@ -52,12 +74,18 @@
     height: 100%;
 }
 
+.flip .card2 {
+    transform: rotateY(180deg);
+}
+
 .card2 {
     position: relative;
     width: 100%;
     height: 100%;
     cursor: pointer;
     transform-style: preserve-3d;
+    transition: all .4s var(--anime-normal);
+    transform: rotateY(0);
 }
 
 .cardSurface {
@@ -86,7 +114,17 @@
 .cardView {
     position: relative;
     z-index: 10;
-    text-align: center;
+    transition: all .3s ease-in-out;
+    transform: translateY(0);
+    /* text-align: center; */
+}
+
+.card:hover .cardView.top {
+    transform: translateY(-2px);
+}
+
+.card:hover .cardView.bottom {
+    transform: translateY(2px);
 }
 
 .cardImg {
@@ -101,10 +139,15 @@
     margin-bottom: calc(.25rem * 4);
 }
 
+.card:hover .imgSvg {
+    transform: rotate(5deg);
+}
+
 .imgSvg {
     width: calc(.25rem * 8);
     height: calc(.25rem * 8);
     color: white;
+    transition: all .3s ease-in-out;
 }
 
 .company {
@@ -120,7 +163,14 @@
     font-weight: 900;
     margin-bottom: calc(.25rem * 2);
     line-height: calc(2/1.5);
+    transition: all .3s ease-in-out;
+    transform: scale(1);
 }
+
+.card:hover .name {
+    transform: scale(1.05);
+}
+
 
 .rank {
     font-size: 1.125rem;
@@ -154,9 +204,12 @@
     color: color-mix(in oklab, var(--color-white) 90%, transparent);
 }
 
-.cardSurface:not(.cardBack) {
-    display: none;
-    transform: rotateY('180deg');
+.cardSurface.cardBack {
+    transform: rotateY(180deg);
+}
+
+.flip .cardBack {
+    display: block;
 }
 
 .cardBack {
@@ -193,7 +246,6 @@
     border-radius: 1rem;
     padding: calc(.25rem * 4);
     margin-bottom: calc(.25rem * 4);
-    ;
     box-shadow: 0 20px 25px -5px #0000001a, 0 8px 10px -6px #0000001a;
 }
 
@@ -251,6 +303,14 @@
 .moreInfo {
     text-align: center;
     margin-top: calc(.25rem * 12);
+    transition: all .8s ease-in-out .2s;
+    opacity: 0;
+    transform: translateY(2rem);
+}
+
+.show .moreInfo {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .tip {

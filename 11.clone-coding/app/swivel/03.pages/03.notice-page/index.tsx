@@ -3,9 +3,9 @@ import { Animated } from '@/app/swivel/05.components';
 
 const NoticePage = () => {
     return (
-        <Animated className={style.show}>
-            <div className={style.section}>
-                <div className={style.pageBody}>
+        <div className={style.section}>
+            <div className={style.pageBody}>
+                <Animated className={style.show} debug={true}>
                     <div className={style.titleSection}>
                         <h2 className={style.title}>
                             Swivel을 통해 경험하는 명함의 새로운 시대
@@ -14,6 +14,8 @@ const NoticePage = () => {
                             단순한 명함 교환을 넘어, 스마트한 네트워킹의 시작!
                         </p>
                     </div>
+                </Animated>
+                <Animated className={style.show}>
                     <div className={style.blurBox}>
                         <div className={style.blurBoxInner}>
                             <p className={`${style.text} ${style.textMargin}`}>
@@ -27,9 +29,9 @@ const NoticePage = () => {
                             </p>
                         </div>
                     </div>
-                </div>
+                </Animated>
             </div>
-        </Animated>
+        </div>
     )
 }
 

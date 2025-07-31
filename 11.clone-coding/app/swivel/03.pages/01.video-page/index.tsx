@@ -30,7 +30,6 @@ const Video = () => {
 }
 
 const VideoPage = () => {
-
     return (
         <Animated className={style.show}>
             <section className={style.videoSection}>

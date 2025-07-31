@@ -15,6 +15,14 @@
 .titleSection {
     text-align: center;
     margin-bottom: calc(var(--spacing) * 16);
+    transition: all 2s var(--anime-normal) 1s;
+    opacity: 0;
+    transform: translateY(2rem);
+}
+
+.show .titleSection {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .title {
@@ -35,7 +43,7 @@
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(1,minmax(0,1fr));
+    grid-template-columns: repeat(1, minmax(0, 1fr));
     gap: calc(var(--spacing) * 8);
     margin-bottom: calc(var(--spacing) * 16);
 }
@@ -46,22 +54,34 @@
     box-shadow: 0 10px 15px -3px #0000001a, 0 4px 6px -4px #0000001a;
     transition: all .3s var(--anime-normal);
     border: solid 1px color-mix(in oklab, var(--color-purple-200) 50%, transparent);
+    opacity: 0;
+    transform: translateY(2rem);
 }
 
-.card:hover {
+.show .card:hover {
     box-shadow: 0 25px 50px -12px #0000001a;
+    /* transition: transform .6s cubic-bezier(.21,.94,1,.84) .2s; */
+    transform: translateY(-1rem) scale(1.02);
+}
+
+.show .card {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .card1 {
     background-image: linear-gradient(to bottom right in oklab, var(--color-blue-50) 0%, var(--color-blue-100) 100%);
+    transition: opacity 2s var(--anime-normal) 1.4s, transform 0.4s cubic-bezier(.21, .94, 1, .84) 1.4s, scale 0.2s cubic-bezier(.21, .94, 1, .84);
 }
 
 .card2 {
     background-image: linear-gradient(to bottom right in oklab, var(--color-green-50) 0%, var(--color-green-100) 100%);
+    transition: opacity 2s var(--anime-normal) 1.8s, transform 0.4s cubic-bezier(.21, .94, 1, .84) 1.8s, scale 0.2s cubic-bezier(.21, .94, 1, .84);
 }
 
 .card3 {
     background-image: linear-gradient(to bottom right in oklab, var(--color-purple-50) 0%, var(--color-purple-100) 100%);
+    transition: opacity 2s var(--anime-normal) 2.2s, transform 0.4s cubic-bezier(.21, .94, 1, .84) 1.2s, scale 0.2s cubic-bezier(.21, .94, 1, .84);
 }
 
 .icon {
@@ -76,16 +96,64 @@
     box-shadow: 0 10px 15px -3px #0000001a, 0 4px 6px -4px #0000001a;
 }
 
-.card1 > .icon {
-    background-image: linear-gradient(to bottom right in oklab, var(--color-blue-500) 0%, var(--color-blue-600) 100%);
+@keyframes bounce {
+
+    0%,
+    100% {
+        rotate: 5deg;
+        scale: 1.1;
+        animation-timing-function: ease-in;
+    }
+
+    50% {
+        rotate: 5deg;
+        scale: 1.0;
+        animation-timing-function: ease-out;
+    }
 }
 
-.card2 > .icon {
+@keyframes bounceBack {
+
+    0%,
+    100% {
+        rotate: -5deg;
+        scale: 1.1;
+        animation-timing-function: ease-in;
+    }
+
+    50% {
+        rotate: 5deg;
+        scale: 1.0;
+        animation-timing-function: ease-out;
+    }
+}
+
+.card1>.icon {
+    background-image: linear-gradient(to bottom right in oklab, var(--color-blue-500) 0%, var(--color-blue-600) 100%);
+    
+}
+
+.card2>.icon {
     background-image: linear-gradient(to bottom right in oklab, var(--color-green-500) 0%, var(--color-green-600) 100%);
 }
 
-.card3 > .icon {
+
+.card3>.icon {
     background-image: linear-gradient(to bottom right in oklab, var(--color-purple-500) 0%, var(--color-purple-600) 100%);
+}
+
+.card1>.icon:hover {
+    animation: bounce .4s forwards;
+}
+
+
+.card2>.icon:hover {
+    animation: bounceBack .4s forwards;
+}
+
+
+.card3>.icon:hover {
+    animation: bounce .4s forwards;
 }
 
 .svg {
@@ -113,11 +181,17 @@
     background: white;
     border-radius: var(--radius-lg);
     padding: calc(var(--spacing) * 8);
-    box-shadow: 0 10px 15px -3px #0000001a,0 4px 6px -4px #0000001a;
+    box-shadow: 0 10px 15px -3px #0000001a, 0 4px 6px -4px #0000001a;
     max-width: var(--container-md);
     margin-inline: auto;
+    transition: all 2s var(--anime-normal) 1s;
+    opacity: 0;
 }
- 
+
+.show .previewSection {
+    opacity: 1;
+}
+
 .preview {
     width: calc(var(--spacing) * 64);
     height: calc(var(--spacing) * 40);
@@ -140,23 +214,30 @@
     text-align: center;
 }
 
-@media screen and (min-width: 40rem) /* sm */ {
+@media screen and (min-width: 40rem)
+/* sm */
+    {
     .pageBody {
         padding-inline: calc(var(--spacing) * 6);
     }
 }
 
-@media screen and (min-width: 48rem) /* md */{
+@media screen and (min-width: 48rem)
+/* md */
+    {
     .title {
         font-size: var(--text-4xl);
         line-height: var(--text-4xl--line-height);
     }
+
     .grid {
-        grid-template-columns: repeat(3,minmax(0,1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 }
 
-@media screen and (min-width: 64rem) /* lg */ {
+@media screen and (min-width: 64rem)
+/* lg */
+    {
     .pageBody {
         padding-inline: calc(var(--spacing) * 8);
     }

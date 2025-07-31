@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 
-export const checkIsInViewport = (elem: HTMLDivElement | null) => {
+// const gap = 8;
+
+export const checkIsInViewport = (elem: HTMLDivElement | null, debug: boolean | undefined) => {
   if (!elem || !window) {
     return false;
   }
@@ -9,8 +11,15 @@ export const checkIsInViewport = (elem: HTMLDivElement | null) => {
     top: elementTop,
     bottom: elementBottom,
   } = elem.getBoundingClientRect();
+  
+  if(debug) {
+    console.log(elementTop, window.pageYOffset, elementBottom);
+  }
 
-  return elementBottom > 0 && elementTop <= window.innerHeight;
+  return (
+    // window.pageYOffset <= elementBottom && 
+  window.pageYOffset >= elementTop
+);
 };
 
 export const useWindowScrollEvent = (listener: EventListener) => {

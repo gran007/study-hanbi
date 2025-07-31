@@ -5,7 +5,7 @@ type CardInfo = {
     title: string,
     desc: string,
     d: string,
-    className: Object,
+    className: string,
 }
 const cardInfo: CardInfo[] = [
     {
@@ -28,11 +28,11 @@ const cardInfo: CardInfo[] = [
     },
 ]
 
-const Card = ({title, desc, d, className} : CardInfo) => {
+const Card = ({ title, desc, d, className }: CardInfo) => {
     return (
         <div className={`${style.card} ${className}`}>
             <div className={style.icon}>
-                <SVG className={style.svg} d={d}/>
+                <SVG className={style.svg} d={d} />
             </div>
             <h3 className={style.cardTitle}>{title}</h3>
             <p className={style.cardDesc}>{desc}</p>
@@ -42,9 +42,9 @@ const Card = ({title, desc, d, className} : CardInfo) => {
 
 const WhyPage = () => {
     return (
-        <Animated className={style.show}>
-            <div className={style.section}>
-                <div className={style.pageBody}>
+        <div className={style.section}>
+            <div className={style.pageBody}>
+                <Animated className={style.show}>
                     <div className={style.titleSection}>
                         <h2 className={style.title}>
                             왜 디지털 명함인가요?
@@ -53,11 +53,15 @@ const WhyPage = () => {
                             종이 명함의 한계를 넘어선 새로운 경험을 제공합니다
                         </p>
                     </div>
-                    <div className={style.grid}>
-                        {cardInfo.map((item, index)=>(
-                            <Card key={index} {...item} />
-                        ))}
-                    </div>
+                </Animated>
+                <div className={style.grid}>
+                    {cardInfo.map((item, index) => (
+                        <Animated key={index} className={style.show}>
+                            <Card {...item} />
+                        </Animated>
+                    ))}
+                </div>
+                <Animated className={style.show}>
                     <div className={style.previewSection}>
                         <div className={style.preview}>
                             <div className={style.previewTitle}>
@@ -68,9 +72,9 @@ const WhyPage = () => {
                             명함을 업로드하여 마법을 경험해보세요!
                         </div>
                     </div>
-                </div>
+                </Animated>
             </div>
-        </Animated>
+        </div>
     )
 }
 

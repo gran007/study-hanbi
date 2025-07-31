@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import style from './style.module.css';
 import { MouseEvent } from 'react';
 import { Animated, SVG } from '@/app/swivel/05.components';

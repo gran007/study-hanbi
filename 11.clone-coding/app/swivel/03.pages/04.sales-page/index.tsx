@@ -8,14 +8,14 @@ type SalesRowType = {
     cardTitle: string,
     cardDesc: string,
     orderLeft: boolean,
-    className: Object,
+    className: string,
 }
 
 const SalesRow = (
     { title, desc, d, cardTitle, cardDesc, orderLeft, className }: SalesRowType
 ) => {
     return (
-        <div className={style.row}>
+        <div className={`${style.row} ${orderLeft ? style.left : style.right}`}>
             <div className={style.grid}>
                 <div className={`${orderLeft ? style.gridLeft : style.gridRight}`}>
                     <h3 className={style.gridTitle}>{title}</h3>
@@ -85,22 +85,25 @@ const salesRowData: SalesRowType[] = [
 
 const SalesPage = () => {
     return (
-        <Animated className={style.show}>
-            <div className={style.section}>
-                <div className={style.pageBody}>
+
+        <div className={style.section}>
+            <div className={style.pageBody}>
+                <Animated className={style.show}>
                     <div className={style.titleSection}>
                         <h2 className={style.title}>
                             Swivel을 통해 경험하는 명함의 새로운 시대
                         </h2>
                     </div>
-                    {
-                        salesRowData.map((item, index) => (
-                            <SalesRow key={index} {...item} />
-                        ))
-                    }
-                </div>
+                </Animated>
+                {
+                    salesRowData.map((item, index) => (
+                        <Animated key={index} className={style.show}>
+                            <SalesRow {...item} />
+                        </Animated>
+                    ))
+                }
             </div>
-        </Animated>
+        </div>
     )
 }
 

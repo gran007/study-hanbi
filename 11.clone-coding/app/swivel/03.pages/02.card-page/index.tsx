@@ -2,6 +2,7 @@
 
 import style from './style.module.css';
 import { Animated, SVG } from '@/app/swivel/05.components';
+import { useState } from 'react';
 
 const gridData = [
     0, 1, 0, 0, 1, 0, 1, 0,
@@ -15,21 +16,22 @@ const gridData = [
 ]
 
 const Card = () => {
+    const [isFlip, setFlip] = useState<boolean>(false);
     return (
         <div className={style.cardContainer}>
-            <div className={style.card}>
+            <div onClick={()=>setFlip(!isFlip)} className={`${style.card} ${isFlip ? style.flip : ''}`}>
                 <div className={style.card1}>
                     <div className={style.card2}>
                         <div className={style.cardSurface}>
                             <div className={style.cardInner}>
-                                <div className={style.cardView}>
+                                <div className={`${style.cardView} ${style.top}`}>
                                     <div className={style.cardImg}>
                                         <SVG className={style.imgSvg}
                                             d={'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4'} />
                                     </div>
                                     <h2 className={style.company}>SWIVEL</h2>
                                 </div>
-                                <div className={style.cardView}>
+                                <div className={`${style.cardView} ${style.bottom}`}>
                                     <h1 className={style.name}>홍길동</h1>
                                     <p className={style.rank}>Senior Product Designer</p>
                                     <div className={style.contact}>
@@ -80,9 +82,9 @@ const Card = () => {
 
 const CardPage = () => {
     return (
-        <Animated className={style.show}>
-            <section className={style.cardSection}>
-                <div className={style.cardPage}>
+        <section className={style.cardSection}>
+            <div className={style.cardPage}>
+                <Animated className={style.show}>
                     <div className={style.titleSection}>
                         <h2 className={style.title}>명함을 클릭해보세요</h2>
                         <p className={style.desc}>
@@ -90,11 +92,18 @@ const CardPage = () => {
                             <br className={style.descBlock} />
                             QR 코드와 연락처 정보가 포함된 디지털 명함을 만들 수 있습니다.</p>
                     </div>
+                </Animated>
+                <Animated className={style.show}>
                     <Card />
+                </Animated>
+                <Animated className={style.show}>
                     <div className={style.moreInfo}>
                         <p className={style.tip}>💡 명함을 클릭하면 뒤집어집니다</p>
                         <div>
-                            <a className={style.scrollButton}>
+                            <a onClick={()=>window.scrollTo({
+                                top: 0,
+                                behavior: 'smooth',
+                            })} className={style.scrollButton}>
                                 <svg className={style.scrollButtonSvg} fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                                 </svg>
@@ -102,9 +111,9 @@ const CardPage = () => {
                             </a>
                         </div>
                     </div>
-                </div>
-            </section >
-        </Animated>
+                </Animated>
+            </div>
+        </section >
     )
 }
 

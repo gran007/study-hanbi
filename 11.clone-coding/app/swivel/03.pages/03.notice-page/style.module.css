@@ -16,6 +16,14 @@
 .titleSection {
     text-align: center;
     margin-bottom: calc(.25rem * 8);
+    transition: all 1.2s var(--anime-normal);
+    opacity: 0;
+    transform: translateY(2rem);
+}
+
+.show .titleSection{
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .title {
@@ -41,6 +49,14 @@
 .blurBox {
     max-width: 56rem;
     margin-inline: auto;
+    transition: all 1.6s var(--anime-normal) .4s;
+    opacity: 0;
+    transform: translateY(2rem);
+}
+
+.show .blurBox {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .blurBoxInner {
@@ -93,7 +109,7 @@
 /* md */
 @media screen and (min-width: 48rem) {
     .section {
-        padding-block: calc(.25rem * 12);
+        padding-block: calc(.25rem * 20);
     }
 
     .titleSection {
