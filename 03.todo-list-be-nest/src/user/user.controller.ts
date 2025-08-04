@@ -5,30 +5,30 @@ import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly service: UserService) {}
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+    return this.service.create(createUserDto);
   }
 
-  @Get()
-  findAll() {
-    return this.userService.findAll();
+  // @Get()
+  // findAll() {
+  //   return this.service.findAll();
+  // }
+
+  @Get('/id/:id')
+  findOne(@Param('id') id: number) {
+    return this.service.findOne(+id);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
+  @Patch('/id/:id')
+  update(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto) {
+    return this.service.update(+id, updateUserDto);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+  @Delete('/id/:id')
+  remove(@Param('id') id: number) {
+    return this.service.remove(+id);
   }
 }

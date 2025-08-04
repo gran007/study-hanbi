@@ -16,9 +16,9 @@ export class UserService {
     return await this.repository.save({ ...createUserDto });
   }
 
-  findAll() {
-    return this.repository.find();
-  }
+  // findAll() {
+  //   return this.repository.find();
+  // }
 
   findOne(id: number) {
     return this.repository.findOne({
