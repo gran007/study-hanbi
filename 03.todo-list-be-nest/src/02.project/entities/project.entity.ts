@@ -6,7 +6,7 @@ import {
     UpdateDateColumn,
     OneToMany
 } from "typeorm";
-import { BoardEntity } from "src/board/entities/board.entity";
+import { BoardEntity } from "src/03.board/entities/board.entity";
 
 @Entity('project')
 export class ProjectEntity {

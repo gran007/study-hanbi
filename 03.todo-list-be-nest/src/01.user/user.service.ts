@@ -5,14 +5,32 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { UserEntity } from './entities/user.entity';
 import { Repository } from 'typeorm';
 
+export interface GoogleUser {
+  id: string;
+  provider: string;
+  name: string;
+  email: string;
+  photo: string;
+}
+
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private repository: Repository<UserEntity>) { }
 
-  async create(createUserDto: CreateUserDto) {
+  async findGoogleDataOrSave(user: GoogleUser) {
+    // TODO find find or save user to db
+    return user;
+  }
 
+  async updateRefreshToken(refreshToken: string) {
+    // save to db refresh token
+    const isSuccess = true;
+    return isSuccess;
+  }
+
+  async create(createUserDto: CreateUserDto) {
     return await this.repository.save({ ...createUserDto });
   }
 

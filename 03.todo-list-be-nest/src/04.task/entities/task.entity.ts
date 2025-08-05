@@ -9,8 +9,8 @@ import {
     JoinColumn
 } from "typeorm";
 
-import { BoardEntity } from "src/board/entities/board.entity";
-import { SubTaskEntity } from "src/sub-task/entities/sub-task.entity";
+import { BoardEntity } from "src/03.board/entities/board.entity";
+import { SubTaskEntity } from "src/05.sub-task/entities/sub-task.entity";
 
 @Entity('task')
 export class TaskEntity {

@@ -1,3 +1,4 @@
+import { TaskEntity } from "src/04.task/entities/task.entity";
 import { 
     Entity, 
     Column, 
@@ -6,15 +7,10 @@ import {
     UpdateDateColumn,
     ManyToOne,
     JoinColumn,
-    OneToMany
 } from "typeorm";
 
-import { ProjectEntity } from 'src/project/entities/project.entity';
-import { TaskEntity } from 'src/task/entities/task.entity';
-
-
-@Entity('board')
-export class BoardEntity {
+@Entity('sub_task')
+export class SubTaskEntity {
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -26,10 +22,16 @@ export class BoardEntity {
     projectId: number;
 
     @Column({nullable: false})
-    name: string;
+    taskId: number;
+
+    @Column({nullable: false})
+    priority: number;
 
     @Column({nullable: false})
     orderNo: number;
+
+    @Column({nullable: false})
+    name: string;
 
     @CreateDateColumn({ nullable: false })
     createAt: Date;
@@ -37,10 +39,7 @@ export class BoardEntity {
     @UpdateDateColumn({ nullable: false })
     updateAt: Date;
 
-    @ManyToOne(() => ProjectEntity, (project) => project.boards)
-    @JoinColumn({name: 'project_id', referencedColumnName: 'id'})
-    project: ProjectEntity
-
-    @OneToMany(() => TaskEntity, (task) => task.board)
-            tasks: TaskEntity[]
+    @ManyToOne(() => TaskEntity, (task) => task.subTasks)
+        @JoinColumn({name: 'task_id', referencedColumnName: 'id'})
+        task: TaskEntity
 }
