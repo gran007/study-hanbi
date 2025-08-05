@@ -1,0 +1,45 @@
+### 작업 ID 검색
+GET {{domain}}/task/id/{{taskId}}
+Content-Type: application/json
+
+### 작업 사용자 ID 검색
+GET {{domain}}/task/board/{{boardId}}
+Content-Type: application/json
+
+### 작업 추가
+POST {{domain}}/task
+Content-Type: application/json
+
+{
+    "userId": {{userId}},
+    "projectId": {{projectId}},
+    "boardId": {{boardId}},
+    "priority": 2,
+    "orderNo": 0,
+    "name": "철수작업3"
+}
+
+### 작업 수정
+PATCH {{domain}}/task/id/{{taskId}}
+Content-Type: application/json
+
+{
+    "boardId": {{boardId}},
+    "priority": 3,
+    "orderNo": 1,
+    "name": "철수작업(수정됨)"
+}
+
+### 작업 순서 수정
+PATCH {{domain}}/task/order
+Content-Type: application/json
+
+[
+  { "id": 1, "orderNo": 2 },
+  { "id": 2, "orderNo": 1 },
+  { "id": 3, "orderNo": 0 }
+]
+
+### 작업 삭제
+DELETE {{domain}}/task/id/{{taskId}}
+Content-Type: application/json

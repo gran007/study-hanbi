@@ -26,9 +26,8 @@ export class ProjectService {
 
   findAll(userId: number) {
     return this.repository.find({
-      where: {
-        userId,
-      }
+      where: { userId },
+      relations: ['boards']
     });
   }
 

@@ -1,0 +1,12 @@
+{
+  "rest-client.environmentVariables": {
+    "todo": {
+      "domain": "http://localhost:3000",
+      "userId": 3,
+      "projectId": 3,
+      "boardId": 1,
+      "taskId": 2,
+      "subTaskId": 1,
+    }
+  }
+}

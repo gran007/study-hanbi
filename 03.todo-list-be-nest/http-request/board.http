@@ -1,0 +1,41 @@
+### 보드 ID 검색
+GET {{domain}}/board/id/{{boardId}}
+Content-Type: application/json
+
+### 보드 사용자 ID 검색
+GET {{domain}}/board/project/{{projectId}}
+Content-Type: application/json
+
+### 보드 추가
+POST {{domain}}/board
+Content-Type: application/json
+
+{
+    "userId": {{userId}},
+    "projectId": {{projectId}},
+    "name": "철수 보드",
+    "orderNo": 3
+}
+
+### 보드 수정
+PATCH {{domain}}/board/id/{{boardId}}
+Content-Type: application/json
+
+{
+  "name": "영희 보드",
+  "orderNo": 3
+}
+
+### 보드 순서 수정
+PATCH {{domain}}/board/order
+Content-Type: application/json
+
+[
+  { "id": 1, "orderNo": 2 },
+  { "id": 2, "orderNo": 1 },
+  { "id": 3, "orderNo": 0 }
+]
+
+### 보드 삭제
+DELETE {{domain}}/board/id/{{boardId}}
+Content-Type: application/json

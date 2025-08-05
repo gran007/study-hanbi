@@ -1,0 +1,45 @@
+### 서브작업 ID 검색
+GET {{domain}}/sub-task/id/{{subTaskId}}
+Content-Type: application/json
+
+### 서브작업 사용자 ID 검색
+GET {{domain}}/sub-task/task/{{taskId}}
+Content-Type: application/json
+
+### 서브작업 추가
+POST {{domain}}/sub-task
+Content-Type: application/json
+
+{
+    "userId": {{userId}},
+    "projectId": {{projectId}},
+    "taskId": {{taskId}},
+    "priority": 2,
+    "orderNo": 0,
+    "name": "철수서브작업2"
+}
+
+### 서브작업 수정
+PATCH {{domain}}/sub-task/id/{{subTaskId}}
+Content-Type: application/json
+
+{
+    "taskId": {{taskId}},
+    "priority": 3,
+    "orderNo": 1,
+    "name": "철수서브작업(수정됨)"
+}
+
+### 서브작업 순서 수정
+PATCH {{domain}}/sub-task/order
+Content-Type: application/json
+
+[
+  { "id": 1, "orderNo": 2 },
+  { "id": 2, "orderNo": 1 },
+  { "id": 3, "orderNo": 0 }
+]
+
+### 서브작업 삭제
+DELETE {{domain}}/sub-task/id/{{subTaskId}}
+Content-Type: application/json

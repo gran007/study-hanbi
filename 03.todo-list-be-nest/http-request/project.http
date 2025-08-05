@@ -1,0 +1,28 @@
+### 프로젝트 ID 검색
+GET {{domain}}/project/id/{{projectId}}
+Content-Type: application/json
+
+### 프로젝트 사용자 ID 검색
+GET {{domain}}/project/user/{{userId}}
+Content-Type: application/json
+
+### 프로젝트 추가
+POST {{domain}}/project
+Content-Type: application/json
+
+{
+    "userId": {{userId}},
+    "name": "철수 프로젝트"
+}
+
+### 프로젝트 수정
+PATCH {{domain}}/project/id/{{projectId}}
+Content-Type: application/json
+
+{
+  "name": "영희 프로젝트"
+}
+
+### 프로젝트 삭제
+DELETE {{domain}}/project/id/{{projectId}}
+Content-Type: application/json
