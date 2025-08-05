@@ -3,7 +3,7 @@ GET {{domain}}/task/id/{{taskId}}
 Content-Type: application/json
 
 ### 작업 사용자 ID 검색
-GET {{domain}}/task/board/{{boardId}}
+GET {{domain}}/task/board/{{boardId}}?priority=2
 Content-Type: application/json
 
 ### 작업 추가
@@ -15,8 +15,8 @@ Content-Type: application/json
     "projectId": {{projectId}},
     "boardId": {{boardId}},
     "priority": 2,
-    "orderNo": 0,
-    "name": "철수작업3"
+    "orderNo": 2,
+    "name": "철수작업"
 }
 
 ### 작업 수정
@@ -26,7 +26,6 @@ Content-Type: application/json
 {
     "boardId": {{boardId}},
     "priority": 3,
-    "orderNo": 1,
     "name": "철수작업(수정됨)"
 }
 
@@ -35,9 +34,10 @@ PATCH {{domain}}/task/order
 Content-Type: application/json
 
 [
-  { "id": 1, "orderNo": 2 },
-  { "id": 2, "orderNo": 1 },
-  { "id": 3, "orderNo": 0 }
+  { "id": 4, "orderNo": 1 },
+  { "id": 5, "orderNo": 2 },
+  { "id": 6, "orderNo": 3 },
+  { "id": 7, "orderNo": 4 }
 ]
 
 ### 작업 삭제

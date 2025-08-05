@@ -3,10 +3,40 @@
     "todo": {
       "domain": "http://localhost:3000",
       "userId": 3,
-      "projectId": 3,
-      "boardId": 1,
-      "taskId": 2,
-      "subTaskId": 1,
+      "projectId": 9,
+      "boardId": 22,
+      "taskId": 8,
+      "subTaskId": 4,
     }
-  }
+  },
+  "sqltools.connections": [
+    {
+      "mysqlOptions": {
+        "authProtocol": "default",
+        "enableSsl": "Disabled"
+      },
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 3306,
+      "driver": "MySQL",
+      "name": "localhost",
+      "database": "test",
+      "username": "test",
+      "password": "test"
+    },
+    {
+      "mysqlOptions": {
+        "authProtocol": "default",
+        "enableSsl": "Disabled"
+      },
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 3306,
+      "driver": "MariaDB",
+      "name": "localhost",
+      "database": "jira",
+      "username": "test",
+      "password": "test"
+    }
+  ]
 }

@@ -12,11 +12,10 @@ Content-Type: application/json
 
 {
     "providerId": "google",
+    "profileImage": null,
     "email": "kim@gmail.com",
     "name": "김철수"
 }
-
-<> 2025-08-05T121234.201.json
 
 ### 사용자 수정
 PATCH {{domain}}/user/id/{{userId}}

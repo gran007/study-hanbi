@@ -12,7 +12,7 @@ Content-Type: application/json
 
 {
     "userId": {{userId}},
-    "name": "철수 프로젝트"
+    "name": "테스트 프로젝트"
 }
 
 ### 프로젝트 수정

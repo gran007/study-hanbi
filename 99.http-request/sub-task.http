@@ -16,7 +16,7 @@ Content-Type: application/json
     "taskId": {{taskId}},
     "priority": 2,
     "orderNo": 0,
-    "name": "철수서브작업2"
+    "name": "철수서브작업1"
 }
 
 ### 서브작업 수정
@@ -26,7 +26,6 @@ Content-Type: application/json
 {
     "taskId": {{taskId}},
     "priority": 3,
-    "orderNo": 1,
     "name": "철수서브작업(수정됨)"
 }
 
@@ -35,9 +34,9 @@ PATCH {{domain}}/sub-task/order
 Content-Type: application/json
 
 [
-  { "id": 1, "orderNo": 2 },
-  { "id": 2, "orderNo": 1 },
-  { "id": 3, "orderNo": 0 }
+  { "id": 4, "orderNo": 1 },
+  { "id": 5, "orderNo": 2 },
+  { "id": 6, "orderNo": 3 }
 ]
 
 ### 서브작업 삭제
