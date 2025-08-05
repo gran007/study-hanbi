@@ -1,8 +1,8 @@
-drop table if exists user;
-drop table if exists project;
+drop table if exists sub_task;
+drop table if exists task;
 drop table if exists board;
 drop table if exists project;
-drop table if exists sub_task;
+drop table if exists user;
 
 
 create table user
