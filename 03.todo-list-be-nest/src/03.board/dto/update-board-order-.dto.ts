@@ -1,8 +1,6 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { BoardEntity } from '../entities/board.entity';
+export class UpdateBoardOrderDto {
 
-export class UpdateBoardOrderDto extends PartialType(BoardEntity) {
-
+    userId: number;
     readonly id: number;
     readonly orderNo: number;
 }

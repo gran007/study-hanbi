@@ -1,5 +1,5 @@
 export class CreateProjectDto {
     
-    readonly userId: number;
+    userId: number;
     readonly name: string;
 }

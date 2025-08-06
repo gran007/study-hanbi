@@ -1,40 +1,52 @@
 ### 보드 ID 검색
 GET {{domain}}/board/id/{{boardId}}
 Content-Type: application/json
+Authorization: Bearer {{auth}}
 
 ### 보드 사용자 ID 검색
 GET {{domain}}/board/project/{{projectId}}
 Content-Type: application/json
+Authorization: Bearer {{auth}}
 
 ### 보드 추가
 POST {{domain}}/board
 Content-Type: application/json
+Authorization: Bearer {{auth}}
 
 {
-    "userId": {{userId}},
     "projectId": {{projectId}},
     "name": "철수 보드",
     "orderNo": 3
 }
 
 ### 보드 수정
-PATCH {{domain}}/board/id/{{boardId}}
+PATCH {{domain}}/board
 Content-Type: application/json
+Authorization: Bearer {{auth}}
 
 {
+  "id": {{boardId}},
   "name": "영희 보드"
 }
 
 ### 보드 순서 수정
 PATCH {{domain}}/board/order
 Content-Type: application/json
+Authorization: Bearer {{auth}}
 
 [
-  { "id": 9, "orderNo": 0 },
-  { "id": 10, "orderNo": 1 },
-  { "id": 11, "orderNo": 2 }
+  { "id": 30, "orderNo": 0 },
+  { "id": 31, "orderNo": 1 },
+  { "id": 32, "orderNo": 2 },
+  { "id": 33, "orderNo": 3 },
+  { "id": 34, "orderNo": 4 }
 ]
 
 ### 보드 삭제
-DELETE {{domain}}/board/id/{{boardId}}
+DELETE {{domain}}/board
 Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+  "id": {{boardId}}
+}

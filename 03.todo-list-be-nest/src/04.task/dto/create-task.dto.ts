@@ -1,6 +1,6 @@
 export class CreateTaskDto {
     
-    readonly userId: number;
+    userId: number;
     readonly projectId: number;
     readonly boardId: number;
     readonly priority: number;

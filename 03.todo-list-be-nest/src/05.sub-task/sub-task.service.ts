@@ -5,6 +5,7 @@ import { UpdateSubTaskDto } from './dto/update-sub-task.dto';
 import { SubTaskEntity } from './entities/sub-task.entity';
 import { Repository } from 'typeorm';
 import { UpdateSubTaskOrderDto } from './dto/update-sub-task-order.dto';
+import { DeleteDto } from 'src/10.common/dto/delete.dto';
 
 @Injectable()
 export class SubTaskService {
@@ -12,35 +13,35 @@ export class SubTaskService {
     @InjectRepository(SubTaskEntity)
     private repository: Repository<SubTaskEntity>) { }
 
-  async create(createSubTaskDto: CreateSubTaskDto) {
-
-    return await this.repository.save({ ...createSubTaskDto });
+  async create(dto: CreateSubTaskDto) {
+    return await this.repository.save(dto);
   }
 
-  findAll(taskId: number) {
+  findAll(userId: number, taskId: number) {
     return this.repository.find({
-      where: { taskId }
+      where: { userId, taskId }
     });
   }
 
-  findOne(id: number) {
+  findOne(userId: number, id: number) {
     return this.repository.findOne({
-      where: { id }
+      where: { userId, id }
     });
   }
 
-  async update(id: number, updateSubTaskDto: UpdateSubTaskDto) {
-    return await this.repository.update({ id }, { ...updateSubTaskDto });
+  async update(dto: UpdateSubTaskDto) {
+    const { userId, id } = dto;
+    return await this.repository.update({ userId, id }, dto);
   }
 
   async updateOrder(dtoList: UpdateSubTaskOrderDto[]) {
     await Promise.all(dtoList.map((dto) => {
-      const { id } = dto;
-      this.repository.update({ id }, { ...dto });
+      const { userId, id } = dto;
+      this.repository.update({ userId, id }, dto);
     }))
   }
 
-  async remove(id: number) {
-    return await this.repository.delete({ id });
+  async remove(dto: DeleteDto) {
+    return await this.repository.delete(dto);
   }
 }

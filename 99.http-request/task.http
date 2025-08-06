@@ -1,29 +1,34 @@
 ### 작업 ID 검색
 GET {{domain}}/task/id/{{taskId}}
 Content-Type: application/json
+Authorization: Bearer {{auth}}
 
 ### 작업 사용자 ID 검색
 GET {{domain}}/task/board/{{boardId}}?priority=2
 Content-Type: application/json
+Authorization: Bearer {{auth}}
 
 ### 작업 추가
 POST {{domain}}/task
 Content-Type: application/json
+Authorization: Bearer {{auth}}
 
 {
     "userId": {{userId}},
     "projectId": {{projectId}},
     "boardId": {{boardId}},
     "priority": 2,
-    "orderNo": 2,
+    "orderNo": 0,
     "name": "철수작업"
 }
 
 ### 작업 수정
-PATCH {{domain}}/task/id/{{taskId}}
+PATCH {{domain}}/task
 Content-Type: application/json
+Authorization: Bearer {{auth}}
 
 {
+    "id": {{taskId}},
     "boardId": {{boardId}},
     "priority": 3,
     "name": "철수작업(수정됨)"
@@ -32,14 +37,19 @@ Content-Type: application/json
 ### 작업 순서 수정
 PATCH {{domain}}/task/order
 Content-Type: application/json
+Authorization: Bearer {{auth}}
 
 [
-  { "id": 4, "orderNo": 1 },
-  { "id": 5, "orderNo": 2 },
-  { "id": 6, "orderNo": 3 },
-  { "id": 7, "orderNo": 4 }
+  { "id": 11, "orderNo": 0 },
+  { "id": 12, "orderNo": 1 },
+  { "id": 13, "orderNo": 2 }
 ]
 
 ### 작업 삭제
-DELETE {{domain}}/task/id/{{taskId}}
+DELETE {{domain}}/task
 Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+  "id": {{taskId}}
+}

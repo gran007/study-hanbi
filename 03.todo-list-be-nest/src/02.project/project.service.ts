@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateProjectDto } from './dto/create-project.dto';
-import { UpdateProjectDto } from './dto/update-project.dto';
 import { ProjectEntity } from './entities/project.entity';
 import { Repository } from 'typeorm';
+import { CreateProjectDto } from './dto/create-project.dto';
+import { UpdateProjectDto } from './dto/update-project.dto';
+import { DeleteDto } from 'src/10.common/dto/delete.dto';
 
 @Injectable()
 export class ProjectService {
@@ -12,10 +13,10 @@ export class ProjectService {
     private repository: Repository<ProjectEntity>
   ) { }
 
-  async create(createProjectDto: CreateProjectDto) {
-    const { userId } = createProjectDto;
+  async create(dto: CreateProjectDto) {
+    const { userId } = dto;
     return await this.repository.save({ 
-      ...createProjectDto,
+      ...dto,
       boards: [
         { userId, name: 'TODO', orderNo: 0},
         { userId, name: 'IN_PROGRESS', orderNo: 1},
@@ -24,25 +25,31 @@ export class ProjectService {
     });
   }
 
-  findAll(userId: number) {
-    return this.repository.find({
+  async findAll(userId: number) {
+    return await this.repository.find({
       where: { userId },
       relations: ['boards']
     });
   }
 
-  findOne(id: number) {
-    return this.repository.findOne({
-      where: { id },
+  async findOne(userId: number, id: number) {
+    const project = await this.repository.findOne({
+      where: { userId, id },
       relations: ['boards']
     });
+    
+    if(!project) {
+      throw new NotFoundException(`project ${id} not found`)
+    }
+    return project;
   }
 
-  async update(id: number, updateProjectDto: UpdateProjectDto) {
-    return await this.repository.update({ id }, { ...updateProjectDto });
+  async update(dto: UpdateProjectDto) {
+    const { id, userId } = dto;
+    return await this.repository.update({ id, userId }, dto);
   }
 
-  async remove(id: number) {
-    return await this.repository.delete({ id });
+  async remove(dto: DeleteDto) {
+    return await this.repository.delete(dto);
   }
 }

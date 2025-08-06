@@ -4,39 +4,33 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserEntity } from './entities/user.entity';
 import { Repository } from 'typeorm';
-
-export interface GoogleUser {
-  id: string;
-  provider: string;
-  name: string;
-  email: string;
-  photo: string;
-}
+import { AuthService, GoogleUser } from 'src/00.auth/auth.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(UserEntity)
-    private repository: Repository<UserEntity>) { }
+    private repository: Repository<UserEntity>,
+    private authService: AuthService
+  ) { }
 
-  async findGoogleDataOrSave(user: GoogleUser) {
-    // TODO find find or save user to db
-    return user;
-  }
+  async findGoogleDataOrSave(userInfo: GoogleUser) {
+    
+    const { provider: providerId, name, email, photo: profileImage } = userInfo;
+    
+    var user = await this.repository.findOne({ where: { email } });
+    if (!user) {
+      user = await this.repository.save({ providerId, email, name, profileImage });
+    }
 
-  async updateRefreshToken(refreshToken: string) {
-    // save to db refresh token
-    const isSuccess = true;
-    return isSuccess;
+    const { accessToken, refreshToken } = this.authService.getToken(user);
+    await this.repository.update({ id: user.id }, { refreshToken });
+    return { accessToken, refreshToken };
   }
 
   async create(createUserDto: CreateUserDto) {
     return await this.repository.save({ ...createUserDto });
   }
-
-  // findAll() {
-  //   return this.repository.find();
-  // }
 
   findOne(id: number) {
     return this.repository.findOne({

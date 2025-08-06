@@ -12,6 +12,7 @@ create table user
     email           varchar(255) not null                   comment '이메일',
     name            varchar(100) not null                   comment '사용자명',
     profile_image   varchar(255) null                       comment '프로파일 이미지',
+    refresh_token   varchar(512) null                   comment 'refresh token',
     create_at timestamp default CURRENT_TIMESTAMP not null  comment '생성시간',
     update_at timestamp default CURRENT_TIMESTAMP not null 
     on update CURRENT_TIMESTAMP                             comment '수정시간'

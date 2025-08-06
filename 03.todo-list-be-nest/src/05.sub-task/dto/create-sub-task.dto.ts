@@ -1,6 +1,6 @@
 export class CreateSubTaskDto {
     
-    readonly userId: number;
+    userId: number;
     readonly projectId: number;
     readonly taskId: number;
     readonly priority: number;

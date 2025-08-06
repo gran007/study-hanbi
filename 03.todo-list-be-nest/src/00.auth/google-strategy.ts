@@ -1,5 +1,4 @@
 import { Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
 import { PassportStrategy } from "@nestjs/passport";
 import { Strategy } from "passport-google-oauth20";
 
@@ -13,7 +12,7 @@ interface GoogleProfile {
 
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy) {
-  constructor(private readonly configService: ConfigService) {
+  constructor() {
     super({
       clientID: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
@@ -35,7 +34,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy) {
       provider:profile.provider,
       name: profile.displayName,
       email: profile.emails[0].value,
-      photo: profile.photos[0].value,
+      photo: profile.photos.length > 0 ? profile.photos[0].value : undefined,
     };
   }
 }

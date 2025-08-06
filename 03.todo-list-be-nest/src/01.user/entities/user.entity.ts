@@ -24,6 +24,9 @@ export class UserEntity {
     @Column()
     profileImage: string;
 
+    @Column()
+    refreshToken: string;
+
     @CreateDateColumn({ nullable: false })
     createAt: Date;
 
