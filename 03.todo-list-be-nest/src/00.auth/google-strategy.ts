@@ -21,13 +21,6 @@ export class GoogleStrategy extends PassportStrategy(Strategy) {
     });
   }
   
-  authorizationParams(): {[key: string]: string; } {
-    return ({
-      access_type: 'offline',
-      prompt: 'select_account',
-    });
-  }
-  
   validate(accessToken: string, refreshToken: string, profile: GoogleProfile) {
     return {
       id: profile.id,
