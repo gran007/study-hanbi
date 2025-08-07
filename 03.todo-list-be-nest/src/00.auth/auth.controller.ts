@@ -14,15 +14,6 @@ export class AuthController {
   @UseGuards(GoogleAuthGuard)
   async googleAuth(@Req() req: Request) { }
 
-  setCookie(res: Response, key: string, value: string, day: number) {
-    res.cookie(key, value, {
-        expires: new Date(Date.now() + (3600 * 1000 * 24 * day)),
-        httpOnly: true, // 자바스크립트로 접근 불가
-        secure: true, // HTTPS로만 전송
-        // sameSite: "strict", // 같은 사이트에서만 전송
-      });
-  }
-
   @Get("redirect")
   @UseGuards(GoogleAuthGuard)
   async googleAuthRedirect(
@@ -31,9 +22,7 @@ export class AuthController {
 
     if (req.user) {
       const { accessToken, refreshToken } = await this.userService.findGoogleDataOrSave(req.user as GoogleUser);
-      this.setCookie(res, "access_token", accessToken, 1);
-      this.setCookie(res, "refresh_token", refreshToken, 7);
-      res.redirect(`http://localhost:${process.env.FE_PORT}`);
+      res.redirect(`http://localhost:${process.env.FE_PORT}/auth?accessToken=${accessToken}&refreshToken=${refreshToken}`);
     } else {
       res.redirect(401, "`http://localhost:${process.env.FE_PORT}/login`");
     }

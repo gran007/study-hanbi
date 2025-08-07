@@ -6,3 +6,4 @@ Authorization: Bearer {{auth}}
 ### 사용자 삭제
 DELETE {{domain}}/user
 Content-Type: application/json
+Authorization: Bearer {{auth}}

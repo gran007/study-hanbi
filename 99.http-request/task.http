@@ -14,12 +14,11 @@ Content-Type: application/json
 Authorization: Bearer {{auth}}
 
 {
-    "userId": {{userId}},
     "projectId": {{projectId}},
     "boardId": {{boardId}},
     "priority": 2,
     "orderNo": 0,
-    "name": "철수작업"
+    "name": "테스트작업3"
 }
 
 ### 작업 수정
@@ -40,9 +39,9 @@ Content-Type: application/json
 Authorization: Bearer {{auth}}
 
 [
-  { "id": 11, "orderNo": 0 },
-  { "id": 12, "orderNo": 1 },
-  { "id": 13, "orderNo": 2 }
+  { "id": 14, "orderNo": 0 },
+  { "id": 15, "orderNo": 1 },
+  { "id": 16, "orderNo": 2 }
 ]
 
 ### 작업 삭제

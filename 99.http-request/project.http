@@ -24,7 +24,7 @@ Authorization: Bearer {{auth}}
 
 {
   "id": {{projectId}},
-  "name": "영희 프로젝트"
+  "name": "철수 프로젝트"
 }
 
 ### 프로젝트 삭제

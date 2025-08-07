@@ -14,12 +14,11 @@ Content-Type: application/json
 Authorization: Bearer {{auth}}
 
 {
-    "userId": {{userId}},
     "projectId": {{projectId}},
     "taskId": {{taskId}},
     "priority": 2,
     "orderNo": 0,
-    "name": "철수서브작업1"
+    "name": "서브작업3"
 }
 
 ### 서브작업 수정
@@ -31,7 +30,7 @@ Authorization: Bearer {{auth}}
     "id": {{subTaskId}},
     "taskId": {{taskId}},
     "priority": 3,
-    "name": "철수서브작업(수정됨)"
+    "name": "서브작업(수정됨)"
 }
 
 ### 서브작업 순서 수정
@@ -40,9 +39,9 @@ Content-Type: application/json
 Authorization: Bearer {{auth}}
 
 [
-  { "id": 11, "orderNo": 1 },
-  { "id": 12, "orderNo": 2 },
-  { "id": 13, "orderNo": 3 }
+  { "id": 14, "orderNo": 1 },
+  { "id": 15, "orderNo": 2 },
+  { "id": 16, "orderNo": 3 }
 ]
 
 ### 서브작업 삭제
