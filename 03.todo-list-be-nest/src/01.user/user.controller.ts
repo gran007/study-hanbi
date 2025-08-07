@@ -1,31 +1,32 @@
-import { 
-  Controller, 
-  Get, 
-  Delete, 
-  UseGuards, 
-  Request 
+import {
+  Controller,
+  Get,
+  Delete,
+  UseGuards,
+  Request
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthGuard } from '@nestjs/passport';
+import { User } from 'src/10.common/decorator/user.decorator';
 
 @UseGuards(AuthGuard('jwt'))
 @Controller('user')
 export class UserController {
-  constructor(private readonly service: UserService) {}
+  constructor(private readonly service: UserService) { }
 
   @Get('/')
-  findOne(@Request() req) {
-    const { providerId, email, name, profileImage } = req.user;
+  findOne(@User() user) {
+    const { providerId, email, name, profileImage } = user;
     return {
-      providerId, 
-      email, 
-      name, 
+      providerId,
+      email,
+      name,
       profileImage
     };
   }
 
   @Delete()
-  remove(@Request() req) {
-    return this.service.remove(req.user.id);
+  remove(@User() user) {
+    return this.service.remove(user.id);
   }
 }

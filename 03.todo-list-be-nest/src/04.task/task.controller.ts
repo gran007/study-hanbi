@@ -6,6 +6,7 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { UpdateTaskOrderDto } from './dto/update-task-order.dto';
 import { DeleteDto } from 'src/10.common/dto/delete.dto';
+import { User } from 'src/10.common/decorator/user.decorator';
 
 @Controller('task')
 @UseGuards(AuthGuard('jwt'))
@@ -13,39 +14,39 @@ export class TaskController {
   constructor(private readonly service: TaskService) { }
 
   @Post()
-  create(@Request() req, @Body() dto: CreateTaskDto) {
-    dto.userId = req.user.id;
+  create(@User() user, @Body() dto: CreateTaskDto) {
+    dto.userId = user.id;
     return this.service.create(dto);
   }
 
   @Get('/board/:id')
-  findAll(@Request() req, @Param('id') boardId: number, 
+  findAll(@User() user, @Param('id') boardId: number, 
   @Query('priority') priority: number,) {
-    return this.service.findAll(req.user.id, boardId, priority);
+    return this.service.findAll(user.id, boardId, priority);
   }
 
   @Get('/id/:id')
-  findOne(@Request() req, @Param('id') id: number) {
-    return this.service.findOne(req.user.id, id);
+  findOne(@User() user, @Param('id') id: number) {
+    return this.service.findOne(user.id, id);
   }
 
   @Patch()
-  update(@Request() req, @Body() dto: UpdateTaskDto) {
-    dto.userId = req.user.id;
+  update(@User() user, @Body() dto: UpdateTaskDto) {
+    dto.userId = user.id;
     return this.service.update(dto);
   }
 
   @Patch('/order')
-  updateOrder(@Request() req, @Body() dtoList: UpdateTaskOrderDto[]) {
+  updateOrder(@User() user, @Body() dtoList: UpdateTaskOrderDto[]) {
     dtoList.forEach((dto) => {
-      dto.userId = req.user.id;
+      dto.userId = user.id;
     })
     return this.service.updateOrder(dtoList);
   }
 
   @Delete()
-  remove(@Request() req, @Body() dto: DeleteDto) {
-    dto.userId = req.user.id;
+  remove(@User() user, @Body() dto: DeleteDto) {
+    dto.userId = user.id;
     return this.service.remove(dto);
   }
 }
