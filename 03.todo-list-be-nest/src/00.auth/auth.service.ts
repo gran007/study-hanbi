@@ -1,8 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from "@nestjs/jwt";
 import { UserEntity } from 'src/01.user/entities/user.entity';
-// import * as jwt from 'jsonwebtoken'
-// import { ConfigService } from "@nestjs/config";
 
 export interface JwtPayload {
   iss: string;
@@ -38,30 +36,13 @@ export class AuthService {
     const accessToken = this.jwtService.sign(payload, {
       expiresIn: "1d",
       secret: process.env.JWT_SECRET_ACCESS_TOKEN_KEY
-      // this.configService.get("JWT_SECRET_ACCESS_TOKEN_KEY"),
     });
 
     const refreshToken = this.jwtService.sign(payload, {
       expiresIn: "7d",
       secret: process.env.JWT_SECRET_REFRESH_TOKEN_KEY
-      // this.configService.get("JWT_SECRET_REFRESH_TOKEN_KEY"),
     });
 
     return { accessToken, refreshToken };
-  }
-
-  verify(jwtString: string) {
-    try {
-      const payload = this.jwtService.verify(jwtString, {
-        secret: process.env.JWT_SECRET_ACCESS_TOKEN_KEY as string
-      });
-
-      return {
-        userId: payload.id,
-        email: payload.email,
-      }
-    } catch (e) {
-      throw new UnauthorizedException(e);
-    }
   }
 }
