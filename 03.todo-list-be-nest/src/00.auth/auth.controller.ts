@@ -24,7 +24,7 @@ export class AuthController {
       const { accessToken, refreshToken } = await this.userService.findGoogleDataOrSave(req.user as GoogleUser);
       res.redirect(`http://localhost:${process.env.FE_PORT}/auth?accessToken=${accessToken}&refreshToken=${refreshToken}`);
     } else {
-      res.redirect(401, "`http://localhost:${process.env.FE_PORT}/login`");
+      res.redirect(401, `http://localhost:${process.env.FE_PORT}/login`);
     }
   }
 }
