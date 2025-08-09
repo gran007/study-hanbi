@@ -28,7 +28,7 @@ export class ProjectService {
   async findAll(userId: number) {
     return await this.repository.find({
       where: { userId },
-      relations: ['boards']
+      relations: ['user', 'boards']
     });
   }
 

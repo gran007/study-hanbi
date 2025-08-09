@@ -4,9 +4,11 @@ import {
     PrimaryGeneratedColumn,
     CreateDateColumn,
     UpdateDateColumn,
-    OneToMany
+    OneToMany,
+    ManyToOne
 } from "typeorm";
 import { BoardEntity } from "src/03.board/entities/board.entity";
+import { UserEntity } from "src/01.user/entities/user.entity";
 
 @Entity('project')
 export class ProjectEntity {
@@ -25,6 +27,9 @@ export class ProjectEntity {
 
     @UpdateDateColumn({ nullable: false })
     updateAt: Date;
+
+    @ManyToOne(() => UserEntity, (user) => user.projects)
+    user: UserEntity
 
     @OneToMany(() => BoardEntity, (board) => board.project, {
         cascade: ['insert']
