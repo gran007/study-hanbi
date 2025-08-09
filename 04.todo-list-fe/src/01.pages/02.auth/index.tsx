@@ -1,13 +1,25 @@
-import style from './style.module.css';
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Auth() {
-    useEffect(() => {
 
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        const queryParams = new URLSearchParams(location.search);
+        const accessToken = queryParams.get('accessToken');
+        const refreshToken = queryParams.get('refreshToken');
+        if(accessToken && refreshToken) {
+            localStorage.setItem('accessToken', accessToken);
+            localStorage.setItem('refreshToken', refreshToken);
+            navigate('/');
+        } else {
+            // navigate('/login');
+        }
     }, []);
 
     return (
-        <div></div>
+        <div>Auth</div>
     )
 }
