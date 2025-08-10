@@ -1,0 +1,46 @@
+.moreButton {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* position: fixed; */
+}
+
+.moreButton:hover {
+    background: var(--button-modal-hover-color);
+}
+
+.settingModal {
+    display: none;
+    position: fixed;
+    background: white;
+    z-index: 100;
+    /* transform: translate(-100px, 16px); */
+    flex-direction: column;
+    border-radius: 8px;
+    padding-block: 8px;
+    border: solid 1px rgb(196, 178, 195);
+    box-shadow: 2px 2px 8px var(--box-shadow-color);
+}
+
+.show {
+    display: flex;
+}
+
+.button {
+    padding: 8px 16px;
+    width: fit-content;
+    min-width: 100px;
+    display: flex;
+    user-select: none;
+}
+
+.button:hover {
+    background: var(--button-modal-hover-color);
+}
+
+.delete {
+    color: var(--delete-button-color);
+}

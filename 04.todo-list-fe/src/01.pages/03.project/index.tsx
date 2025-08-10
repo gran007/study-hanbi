@@ -1,22 +1,35 @@
 import style from './style.module.css';
-import { useState, useEffect, useCallback, useMemo, type ChangeEvent } from 'react'
+import { useState, useEffect, type ChangeEvent, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { useProjectListQuery } from '@/03.query';
+import {
+    useProjectListQuery,
+    useDeleteProjectQuery,
+} from '@/03.query';
 import { Riple } from "react-loading-indicators";
+import { ButtonModal } from '@/02.component';
+import ProjectModal from './01.project-modal'
+import { alertStore } from '@/04.store';
 
 interface User {
     name: string;
 }
 
-interface Project {
+export interface Project {
+    id: number;
     name: string;
     user: User;
 }
 
 export default function Project() {
-    const navigate = useNavigate();
+    const [search, setSearch] = useState<string>('');
+    const [showModal, setShowModal] = useState<boolean>(false);
+    // const [showAlert, setShowAlert] = useState<boolean>(false);
     const { isLoading, error, data } = useProjectListQuery();
-    const [search, setSearch] = useState('');
+    const navigate = useNavigate();
+    const { open, close } = alertStore();
+
+    const deleteData = useDeleteProjectQuery(() => close());
+    const selectedProject = useRef<Project>(null);
 
     useEffect(() => {
         if (!localStorage.getItem('accessToken')) {
@@ -34,47 +47,79 @@ export default function Project() {
         )
     }
 
-    const result = search.length === 0 ? data?.data : data?.data.filter((item: Project)=>item.name.includes(search))
-    
+    const result = search.length === 0 ? data?.data || []
+        : data?.data.filter((item: Project) => item.name.includes(search))
+
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
+    }
+
+    const onDeleteEvent = (project: Project) => {
+        open({
+            title: '삭제',
+            body: '해당 프로젝트를 삭제하시겠습니까?',
+            buttons: [
+                {
+                    name: '확인', onClick: () => {
+                        deleteData.mutate({
+                            id: project.id,
+                        });
+                    }
+                },
+                { name: '취소', onClick: () => { close() } },
+            ]
+        });
     }
 
     return (
         <>
             <div className={style.body}>
                 <div className={style.container}>
-                    <div className={style.title}>
-                        프로젝트
-                        <div className={style.button}>프로젝트 만들기</div>
-                    </div>
                     <div className={style.inputSection}>
-                        <input 
-                            className={style.input} 
+                        <input
+                            className={style.searchInput}
                             value={search}
                             placeholder='프로젝트 검색'
-                            onChange={onChange}/>
+                            onChange={onChange} />
+                    </div>
+                    <div className={style.title}>
+                        프로젝트
+                        <div onClick={() => {
+                            selectedProject.current = null;
+                            setShowModal(true);
+                        }} className={style.button}>프로젝트 만들기</div>
                     </div>
                     <div className={style.project}>
                         <div className={style.header}>
                             <div className={style.header1}>이름</div>
                             <div className={style.header2}>사용자</div>
+                            <div className={style.header3}>설정</div>
                         </div>
-                        {result.map(({ name, user }: Project, index: number)=>(
+                        {result.map((project: Project, index: number) => (
                             <div key={index} className={style.item}>
-                                <div className={style.body1}>{name}</div>
-                                <div className={style.body2}>{user.name}</div>
+                                <div className={style.body1}>{project.name}</div>
+                                <div className={style.body2}>{project.user.name}</div>
+                                <div className={style.body3}>
+                                    <ButtonModal
+                                        onUpdateEvent={() => {
+                                            selectedProject.current = project;
+                                            setShowModal(true);
+                                        }}
+                                        onDeleteEvent={()=>onDeleteEvent(project)}
+                                    />
+                                </div>
                             </div>
                         ))}
                     </div>
                 </div>
             </div>
-            {
-                isLoading &&
-                <div className={style.loading}>
-                    <Riple size='small' color='#2F7AE5' />
-                </div>
-            }
+            <ProjectModal
+                project={selectedProject}
+                show={showModal}
+                setShow={setShowModal} />
+            <div className={`${style.loading} ${isLoading && style.show}`}>
+                <Riple size='small' color='#2F7AE5' />
+            </div>
         </>
     )
 }

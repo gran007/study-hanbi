@@ -1,0 +1,75 @@
+.modal {
+    background: white;
+    box-shadow: 4px 4px 16px var(--box-shadow-color);
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    color: black;
+}
+
+.modalTitle {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 32px;
+    padding-left: 8px;
+}
+
+.inputTitle {
+    font-size: 18px;
+    color: var(--input-title-color);
+    font-weight: 700;
+    padding-left: 8px;
+    margin-bottom: 8px;
+}
+
+.inputText {
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: white;
+    width: 300px;
+    font-size: 18px;
+    color: black;
+    border: solid 3px var(--input-border-color);
+    outline: none;
+    margin-bottom: 32px;
+}
+
+.inputText:focus {
+    border: solid 3px var(--input-border-hover-color);
+}
+
+.buttonGroup {
+    display: flex;
+    width: 100%;
+    gap: 16px;
+    justify-content: flex-end;
+}
+
+.modalButton {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--button-text-color);
+    padding: 8px;
+    border-radius: 8px;
+    border: solid 2px var(--button-border-color);
+    min-width: 56px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.modalButton.disabled {
+    color: var(--button-disabled-color);
+    border: solid 2px var(--button-disabled-color);
+}
+
+.modalButton:not(.disabled):hover {
+    background-color: var(--button-hover-color);
+}
+
+.cancel {
+    color: var(--cancel-button-color);
+    border: solid 2px var(--cancel-button-color);
+}

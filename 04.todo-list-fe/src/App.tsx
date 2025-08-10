@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Project, Login, Auth } from './01.pages'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import axios from './02.component/axios';
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import axios from './05.util/axios';
+import { Alert } from '@/02.component'
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ function App() {
           </Routes>
         )
       }
+      <Alert />
     </QueryClientProvider>
   )
 }

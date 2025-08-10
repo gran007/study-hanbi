@@ -1,3 +1,24 @@
 #root {
   width: 100%;
 }
+
+:root {
+  --primary-color: rgb(174, 17, 143);
+  --text-shadow-color: rgba(200, 0, 200, .4);
+  --deep-primary-color: rgb(108, 4, 88);
+  --input-border-color: rgba(200, 0, 200, .6);
+  --table-border-color: rgb(180, 180, 200, .6);
+  --box-shadow-color:  rgba(0, 0, 0, .2);
+  --table-header-color: rgb(142, 27, 119);
+  --table-header-text-color: rgb(228, 200, 223);
+  --table-item-hover-color: rgb(245, 191, 222);
+  --input-title-color: rgb(122, 5, 100);
+  --input-border-hover-color: rgb(173, 4, 173);
+  --button-border-color: rgb(200, 0, 200);
+  --button-text-color: rgb(122, 5, 100);
+  --button-hover-color: rgb(240, 240, 240);
+  --delete-button-color: rgb(255, 0, 43);
+  --cancel-button-color: rgb(253, 82, 2);
+  --button-modal-hover-color: rgb(240, 240, 240);
+  --button-disabled-color: rgb(163, 163, 163);
+}
