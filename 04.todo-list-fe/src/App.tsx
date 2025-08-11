@@ -13,10 +13,17 @@ function App() {
   const [load, setLoad] = useState(false);
 
   useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
-    if (accessToken) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+    
+    const { pathname } = window.location;
+    if (!pathname.includes('/login') && !pathname.includes('/auth')) {
+      const accessToken = localStorage.getItem('accessToken');
+      if (accessToken) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+      } else {
+        window.location.href = `${window.location.origin}/login`;
+      }
     }
+
     setLoad(true);
   }, [])
 

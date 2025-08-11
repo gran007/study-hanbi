@@ -15,11 +15,11 @@ export default function Auth() {
             localStorage.setItem('refreshToken', refreshToken);
             navigate('/');
         } else {
-            // navigate('/login');
+            navigate('/login');
         }
     }, []);
 
     return (
-        <div>Auth</div>
+        <div></div>
     )
 }
