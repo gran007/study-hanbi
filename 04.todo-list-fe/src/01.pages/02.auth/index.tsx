@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom';
+import axios from '@/05.util/axios';
 
 export default function Auth() {
 
@@ -13,6 +14,7 @@ export default function Auth() {
         if(accessToken && refreshToken) {
             localStorage.setItem('accessToken', accessToken);
             localStorage.setItem('refreshToken', refreshToken);
+            axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
             navigate('/');
         } else {
             navigate('/login');
