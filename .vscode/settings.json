@@ -7,7 +7,7 @@
       "boardId": 43,
       "taskId": 15,
       "subTaskId": 14,
-      "auth": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJKaXJhVG9kb0xpc3QiLCJuYW1lIjoiSm9uZ0h3YSBMZWUiLCJlbWFpbCI6ImdyYW4wMDNAZ21haWwuY29tIiwidXNlcklkIjoxNCwiaWF0IjoxNzU0NTQ5OTIxLCJleHAiOjE3NTQ2MzYzMjF9.Qt8aAtXkt46MiYiQ6KFZ_hjId3g75X0Z-V60-CEt5Ic"
+      "auth": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJKaXJhVG9kb0xpc3QiLCJuYW1lIjoiSm9uZ0h3YSBMZWUiLCJlbWFpbCI6ImdyYW4wMDNAZ21haWwuY29tIiwidXNlcklkIjoxNCwiaWF0IjoxNzU0OTA3NDc4LCJleHAiOjE3NTQ5OTM4Nzh9.hQMGDSrl2NIIwX56UTJ8JEj9HuEIxYMi2BIpZ5IbvPo"
     }
   },
   "sqltools.connections": [
