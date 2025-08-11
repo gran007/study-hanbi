@@ -4,7 +4,7 @@ import { Modal } from "@/02.component"
 import {
     useAddProjectQuery,
     useUpdateProjectQuery,
-} from '@/03.query';
+} from '@/03.query/01.project';
 import { type Project } from '../'
 import { type Dispatch, type SetStateAction, type RefObject } from 'react';
 

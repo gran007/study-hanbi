@@ -1,10 +1,9 @@
 import style from './style.module.css';
-import { useState, useEffect, type ChangeEvent, useRef } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useState, type ChangeEvent, useRef } from 'react'
 import {
     useProjectListQuery,
     useDeleteProjectQuery,
-} from '@/03.query';
+} from '@/03.query/01.project';
 import { Riple } from "react-loading-indicators";
 import { ButtonModal } from '@/02.component';
 import ProjectModal from './01.project-modal'
@@ -23,19 +22,11 @@ export interface Project {
 export default function Project() {
     const [search, setSearch] = useState<string>('');
     const [showModal, setShowModal] = useState<boolean>(false);
-    // const [showAlert, setShowAlert] = useState<boolean>(false);
     const { isLoading, error, data } = useProjectListQuery();
-    const navigate = useNavigate();
     const { open, close } = alertStore();
 
     const deleteData = useDeleteProjectQuery(() => close());
     const selectedProject = useRef<Project>(null);
-
-    useEffect(() => {
-        if (!localStorage.getItem('accessToken')) {
-            navigate('/login');
-        }
-    }, []);
 
     if (error) {
         return (
