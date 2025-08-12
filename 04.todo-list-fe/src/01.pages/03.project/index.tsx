@@ -5,7 +5,7 @@ import {
     useDeleteProjectQuery,
 } from '@/03.query/01.project';
 import { Riple } from "react-loading-indicators";
-import { ButtonModal } from '@/02.component';
+import ButtonModal from './02.button-modal';
 import ProjectModal from './01.project-modal'
 import { alertStore } from '@/04.store';
 

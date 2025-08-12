@@ -1,6 +1,6 @@
 import style from './style.module.css'
 import { useState, createRef, useEffect } from "react";
-import { MoreVert } from '../01.icons';
+import { MoreVert } from '../../../02.component/01.icons';
 
 interface clickEvent {
     onUpdateEvent: Function;
@@ -31,7 +31,7 @@ export default function ButtonModal({ onUpdateEvent, onDeleteEvent }: clickEvent
                 <MoreVert />
             </div>
             <div ref={modalRef}
-                style={{ transform: `translate(-100px, ${16 - window.scrollY}px)` }}
+                // style={{ transform: `translate(-100px, ${16 - window.scrollY}px)` }}
                 className={`${style.settingModal} ${show && style.show}`}>
                 <div onClick={() => {
                     onUpdateEvent();

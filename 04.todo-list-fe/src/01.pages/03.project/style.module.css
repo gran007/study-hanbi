@@ -18,9 +18,7 @@
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    max-width: 768px;
+    width: 768px;
 }
 
 .title {
@@ -73,7 +71,6 @@
     align-items: center;
     background-color: white;
     border-radius: 16px;
-    position: relative;
     border: solid 3px var(--table-border-color);
     overflow: hidden;
     box-shadow: 4px 4px 16px var(--box-shadow-color);
@@ -85,7 +82,6 @@
 
 .header {
     display: flex;
-    min-width: 768px;
     width: 100%;
     align-items: center;
     justify-content: center;
@@ -114,7 +110,6 @@
 
 .item {
     display: flex;
-    min-width: 768px;
     width: 100%;
     padding-block: 16px;
     border-bottom: solid 1px var(--table-border-color);

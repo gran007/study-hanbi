@@ -41,6 +41,8 @@
 **/next-env.d.ts
 
 /todo-list
+/todo-list-front
 **/*.env
 
 **/.vscode/
+
