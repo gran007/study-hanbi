@@ -4,10 +4,10 @@ import {
     useProjectListQuery,
     useDeleteProjectQuery,
 } from '@/03.query/01.project';
-import { Riple } from "react-loading-indicators";
 import ButtonModal from './02.button-modal';
 import ProjectModal from './01.project-modal'
 import { alertStore } from '@/04.store';
+import { Error, Loading } from '@/02.component'
 
 interface User {
     name: string;
@@ -28,15 +28,7 @@ export default function Project() {
     const deleteData = useDeleteProjectQuery(() => close());
     const selectedProject = useRef<Project>(null);
 
-    if (error) {
-        return (
-            <div className={style.body}>
-                <div className={style.error}>
-                    {error.message}
-                </div>
-            </div>
-        )
-    }
+    if(error) return (<Error error={error} />)
 
     const result = search.length === 0 ? data?.data || []
         : data?.data.filter((item: Project) => item.name.includes(search))
@@ -48,13 +40,11 @@ export default function Project() {
     const onDeleteEvent = (project: Project) => {
         open({
             title: '삭제',
-            body: '해당 프로젝트를 삭제하시겠습니까?',
+            body: '프로젝트를 삭제하시겠습니까?',
             buttons: [
                 {
                     name: '확인', onClick: () => {
-                        deleteData.mutate({
-                            id: project.id,
-                        });
+                        deleteData.mutate({ id: project.id });
                     }
                 },
                 { name: '취소', onClick: () => { close() } },
@@ -64,6 +54,12 @@ export default function Project() {
 
     return (
         <>
+            <ProjectModal
+                project={selectedProject}
+                show={showModal}
+                setShow={setShowModal} />
+            <Loading isLoading={isLoading} />
+            
             <div className={style.body}>
                 <div className={style.container}>
                     <div className={style.inputSection}>
@@ -96,20 +92,13 @@ export default function Project() {
                                             selectedProject.current = project;
                                             setShowModal(true);
                                         }}
-                                        onDeleteEvent={()=>onDeleteEvent(project)}
+                                        onDeleteEvent={() => onDeleteEvent(project)}
                                     />
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
-            </div>
-            <ProjectModal
-                project={selectedProject}
-                show={showModal}
-                setShow={setShowModal} />
-            <div className={`${style.loading} ${isLoading && style.show}`}>
-                <Riple size='small' color='#2F7AE5' />
             </div>
         </>
     )

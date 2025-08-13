@@ -6,7 +6,6 @@ import type { ButtonType } from '@/04.store';
 export default function Alert() {
 
     const { show, title, body, buttons, close } = alertStore();
-    
     const modalRef = createRef<HTMLDivElement>();
     const handleClickOutside = (event: MouseEvent) => {
         if (modalRef.current && !modalRef.current.contains(event.target as HTMLElement)) {
@@ -28,7 +27,7 @@ export default function Alert() {
                 <div className={style.body}>{body}</div>
                 <div className={style.buttonGroup}>
                     {buttons?.map((item: ButtonType) => (
-                        <div onClick={()=>item.onClick()} className={style.button}>{item.name}</div>
+                        <div onClick={() => item.onClick()} className={style.button}>{item.name}</div>
                     ))}
                 </div>
             </div>

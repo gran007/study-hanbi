@@ -1,0 +1,49 @@
+.body {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    background-image: linear-gradient(to bottom right in oklab, oklch(97% .014 254.604) 0%, oklch(98.5% .002 247.839) 100%);
+    color: black;
+    padding-top: 32px;
+    padding-bottom: 32px;
+    padding-left: 200px;
+}
+
+.boardList {
+    display: flex;
+    overflow-x: scroll;
+}
+
+.board {
+    min-width: 270px;
+    background: var(--board-color);
+    border-radius: 4px;
+}
+
+.title {
+    font-size: 12px;
+    gap: 8px;
+    color: var(--board-title-color);
+    margin-bottom: 8px;
+}
+
+.tag {
+    background: var(--board-tag-color);
+    border-radius: 2px;
+    color: black;
+}
+
+.taskCard {
+    width: 100%;
+    margin-inline: 2px;
+    border: solid 1px var(--table-border-color);
+}
+
+.taskAddLine {
+    width: 100%;
+    height: 1px;
+    background: var(--board-color);
+}

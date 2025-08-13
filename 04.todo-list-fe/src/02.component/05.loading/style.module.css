@@ -1,0 +1,12 @@
+.loading {
+    display: none;
+    position: fixed;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.show {
+    display: flex;
+}

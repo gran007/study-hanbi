@@ -21,4 +21,7 @@
   --cancel-button-color: rgb(253, 82, 2);
   --button-modal-hover-color: rgb(240, 240, 240);
   --button-disabled-color: rgb(163, 163, 163);
+  --board-color: rgb(230, 230, 230);
+  --board-tag-color: rgb(200, 200, 200);
+  --board-title-color: rgb(80, 80, 80);
 }

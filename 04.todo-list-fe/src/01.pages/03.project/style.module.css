@@ -7,8 +7,8 @@
     justify-content: center;
     background-image: linear-gradient(to bottom right in oklab, oklch(97% .014 254.604) 0%, oklch(98.5% .002 247.839) 100%);
     color: black;
-    padding-top: 64px;
-    padding-bottom: 128px;
+    padding-top: 32px;
+    padding-bottom: 32px;
 }
 
 .error {
@@ -125,16 +125,4 @@
 
 .item:hover {
     background: var(--table-item-hover-color);
-}
-
-.loading {
-    display: none;
-    position: fixed;
-    inset: 0;
-    align-items: center;
-    justify-content: center;
-}
-
-.show {
-    display: flex;
 }
