@@ -1,0 +1,53 @@
+.titleSection {
+    margin-bottom: 8px;
+}
+
+.title {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.titleText {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--board-title-color);
+    flex: 1;
+    border-radius: 4px;
+    padding-left: 8px;
+    cursor: pointer;
+}
+
+.titleText:hover {
+    background-color: var(--deep-board-color);
+}
+
+.titleButton {
+    display: flex;
+    visibility: hidden;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.titleSection:hover .titleButton {
+    visibility: visible;
+}
+
+.titleButton:hover {
+    background-color: var(--deep-board-color);
+}
+
+.input {
+    background-color: white;
+    color: black;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: solid 1px gray;
+    width: -webkit-fill-available;
+}

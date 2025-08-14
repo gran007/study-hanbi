@@ -8,6 +8,7 @@ import ButtonModal from './02.button-modal';
 import ProjectModal from './01.project-modal'
 import { alertStore } from '@/04.store';
 import { Error, Loading } from '@/02.component'
+import { useNavigate } from 'react-router-dom';
 
 interface User {
     name: string;
@@ -24,6 +25,7 @@ export default function Project() {
     const [showModal, setShowModal] = useState<boolean>(false);
     const { isLoading, error, data } = useProjectListQuery();
     const { open, close } = alertStore();
+    const navigate = useNavigate();
 
     const deleteData = useDeleteProjectQuery(() => close());
     const selectedProject = useRef<Project>(null);
@@ -50,6 +52,10 @@ export default function Project() {
                 { name: '취소', onClick: () => { close() } },
             ]
         });
+    }
+
+    const navigateToBoard = (project: Project) => {
+        navigate(`/board/${project.id}`)
     }
 
     return (
@@ -84,7 +90,8 @@ export default function Project() {
                         </div>
                         {result.map((project: Project, index: number) => (
                             <div key={index} className={style.item}>
-                                <div className={style.body1}>{project.name}</div>
+                                <div className={style.body1}
+                                onClick={()=>navigateToBoard(project)}>{project.name}</div>
                                 <div className={style.body2}>{project.user.name}</div>
                                 <div className={style.body3}>
                                     <ButtonModal

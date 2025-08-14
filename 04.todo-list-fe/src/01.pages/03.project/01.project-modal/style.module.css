@@ -1,3 +1,16 @@
+.modalBackground {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .2);
+    align-items: center;
+    justify-content: center;
+}
+
+.show {
+    display: flex;
+}
+
 .modal {
     background: white;
     box-shadow: 4px 4px 16px var(--box-shadow-color);

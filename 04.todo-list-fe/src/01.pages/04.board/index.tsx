@@ -3,52 +3,81 @@ import { useState } from 'react';
 import {
     useBoardListQuery,
     useAddBoardQuery,
-    useUpdateBoardQuery,
     useUpdateBoardOrderQuery,
     useDeleteBoardQuery
 } from '@/03.query/02.board';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { alertStore } from '04.store';
 import { Error, Loading } from '@/02.component';
+import { Fragment } from 'react';
+import AddTaskButton from './02.add-task-button';
+import BoardTitle from './01.board-title';
+import MoreVert from '@mui/icons-material/MoreVert'
 
-interface BoardDto {
+export interface TaskDto {
     id: number;
     projectId: number;
-    name: number;
+    boardId: number;
+    priority: number;
     orderNo: number;
+    name: string;
+}
+
+export interface BoardDto {
+    id: number;
+    projectId: number;
+    name: string;
+    orderNo: number;
+    tasks: TaskDto[];
 }
 
 export default function Board() {
-    const [searchParams] = useSearchParams();
-    const [projectId] = useState(+(searchParams.get('projectId') as string));
+    const navigate = useNavigate();
+    const { id } = useParams();
+    if (!id) {
+        navigate(-1);
+    }
+
+    const [projectId] = useState(parseInt(id as string));
     const { isLoading, error, data } = useBoardListQuery(projectId);
-    const { open, close } = alertStore();
-    const deleteData = useDeleteBoardQuery(projectId, () => close());
 
     if (error) return (<Error error={error} />)
 
     const result = data?.data || [];
-    console.log(result);
-    const onDeleteEvent = (project: BoardDto) => {
-        open({
-            title: '삭제',
-            body: '보드를 삭제하시겠습니까?',
-            buttons: [
-                {
-                    name: '확인', onClick: () => {
-                        deleteData.mutate({ id: project.id });
-                    }
-                },
-                { name: '취소', onClick: () => { close() } },
-            ]
-        });
-    }
 
     return (
         <>
             <Loading isLoading={isLoading} />
             <div className={style.body}>
-
+                <div className={style.boardSection}>
+                    {result.map((board: BoardDto, boardKey: number) => {
+                        return (
+                            <Fragment key={boardKey}>
+                                <div className={style.boardBar}></div>
+                                <div className={style.board}>
+                                    <BoardTitle board={board} />
+                                    {
+                                        board.tasks.map((task: TaskDto, taskKey: number) => (
+                                            <Fragment key={taskKey}>
+                                                <div className={style.taskBar}></div>
+                                                <div className={style.task}>
+                                                    <div className={style.taskTitle}>
+                                                        <div className={style.taskName}>{task.name}</div>
+                                                    </div>
+                                                    <div className={style.button}>
+                                                        <MoreVert/>
+                                                    </div>
+                                                </div>
+                                            </Fragment>
+                                        ))
+                                    }
+                                    <div className={style.taskBottomBar}></div>
+                                    <AddTaskButton board={board} />
+                                </div>
+                            </Fragment>
+                        )
+                    })}
+                </div>
             </div>
         </>
     )

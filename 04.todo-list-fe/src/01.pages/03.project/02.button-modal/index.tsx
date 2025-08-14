@@ -1,6 +1,7 @@
 import style from './style.module.css'
-import { useState, createRef, useEffect } from "react";
-import { MoreVert } from '../../../02.component/01.icons';
+import { useState } from "react";
+import { ClickCancel } from '@/02.component';
+import MoreHoriz from '@mui/icons-material/MoreHoriz'
 
 interface clickEvent {
     onUpdateEvent: Function;
@@ -10,28 +11,14 @@ interface clickEvent {
 export default function ButtonModal({ onUpdateEvent, onDeleteEvent }: clickEvent) {
 
     const [show, setShow] = useState<Boolean>(false);
-    const modalRef = createRef<HTMLDivElement>();
-
-    const handleClickOutside = (event: MouseEvent) => {
-        if (modalRef.current && !modalRef.current.contains(event.target as HTMLElement)) {
-            setShow(false);
-        }
-    };
-
-    useEffect(() => {
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [show]);
 
     return (
-        <div>
+        <>
             <div onClick={() => setShow(true)} className={style.moreButton}>
-                <MoreVert />
+                <MoreHoriz sx={{ color: "#807d7dff"}} />
             </div>
-            <div ref={modalRef}
-                // style={{ transform: `translate(-100px, ${16 - window.scrollY}px)` }}
+            <ClickCancel
+                setCancel={()=>setShow(false)}
                 className={`${style.settingModal} ${show && style.show}`}>
                 <div onClick={() => {
                     onUpdateEvent();
@@ -41,7 +28,7 @@ export default function ButtonModal({ onUpdateEvent, onDeleteEvent }: clickEvent
                     onDeleteEvent();
                     setShow(false);
                 }} className={`${style.button} ${style.delete}`}>삭제</div>
-            </div>
-        </div>
+            </ClickCancel>
+        </>
     )
 }

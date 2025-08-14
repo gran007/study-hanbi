@@ -17,7 +17,6 @@ export default function Swivel() {
     return (
         <div className={style.body}>
             <Header onClickLanguageButton={() => setShowModal(true)} />
-            <Modal show={showModal} setShow={setShowModal} />
             <FirstPage />
             <CardPage />
             <NoticePage />

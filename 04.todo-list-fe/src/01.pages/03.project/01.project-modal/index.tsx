@@ -1,12 +1,12 @@
 import style from './style.module.css'
 import { useEffect, useState } from 'react'
-import { Modal } from "@/02.component"
 import {
     useAddProjectQuery,
     useUpdateProjectQuery,
 } from '@/03.query/01.project';
 import { type Project } from '../'
 import { type Dispatch, type SetStateAction, type RefObject } from 'react';
+import { ClickCancel } from '@/02.component';
 
 interface ProjectModalType {
     project: RefObject<Project | null>;
@@ -49,8 +49,8 @@ const ProjectModal = ({ project, show, setShow } : ProjectModalType) => {
     }
 
     return (
-        <Modal show={show} setShow={setShow}>
-            <div className={style.modal}>
+        <div className={`${style.modalBackground} ${show && style.show}`}>
+            <ClickCancel setCancel={()=>setShow(false)}  className={style.modal}>
                 <div className={style.modalTitle}>
                     {project.current ? '프로젝트 수정' : '프로젝트 추가'}
                 </div>
@@ -64,8 +64,8 @@ const ProjectModal = ({ project, show, setShow } : ProjectModalType) => {
                     <div className={`${style.modalButton} ${style.cancel}`}
                         onClick={() => setShow(false)}>취소</div>
                 </div>
-            </div>
-        </Modal>
+            </ClickCancel>
+        </div>
     )
 }
 

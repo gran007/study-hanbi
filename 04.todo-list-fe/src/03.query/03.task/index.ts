@@ -26,16 +26,16 @@ interface DeleteTaskDto {
   readonly id: number;
 }
 
-export function useTaskListQuery(boardId: number) {
-  return useQuery({
-    queryKey: ['task', 'list', boardId],
-    queryFn: async () => {
-      return await axios.get(`/task/board/${boardId}`);
-    },
-  });
-};
+// export function useTaskListQuery(boardId: number) {
+//   return useQuery({
+//     queryKey: ['task', 'list', boardId],
+//     queryFn: async () => {
+//       return await axios.get(`/task/board/${boardId}`);
+//     },
+//   });
+// };
 
-export function useAddTaskQuery(boardId: number, clear: Function) {
+export function useAddTaskQuery(clear: Function) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (dto: CreateTaskDto) => {
@@ -43,14 +43,14 @@ export function useAddTaskQuery(boardId: number, clear: Function) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['task', 'list', boardId],
+        queryKey: ['board', 'list'],
       });
       clear();
     }
   });
 };
 
-export function useUpdateTaskQuery(boardId: number, clear: Function) {
+export function useUpdateTaskQuery(clear: Function) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (dto: UpdateTaskDto) => {
@@ -58,14 +58,14 @@ export function useUpdateTaskQuery(boardId: number, clear: Function) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['task', 'list', boardId],
+        queryKey: ['board', 'list'],
       });
       clear();
     }
   });
 };
 
-export function useUpdateTaskOrderQuery(boardId: number, clear: Function) {
+export function useUpdateTaskOrderQuery(clear: Function) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (dtoList: UpdateTaskOrder[]) => {
@@ -73,7 +73,7 @@ export function useUpdateTaskOrderQuery(boardId: number, clear: Function) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['task', 'list', boardId],
+        queryKey: ['board', 'list'],
       });
       clear();
     }

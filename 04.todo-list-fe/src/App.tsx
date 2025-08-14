@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import axios from './05.util/axios';
 import { Alert } from '@/02.component'
+import Board from './01.pages/04.board';
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,8 @@ function App() {
         navigate('/login');
         setLoad(true);
       }
+    } else {
+      setLoad(true);
     }
   }, []);
 
@@ -47,6 +50,7 @@ function App() {
             <Route path='/' element={<Project />} />
             <Route path='/auth' element={<Auth />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/board/:id' element={<Board />} />
           </Routes>
         )
       }

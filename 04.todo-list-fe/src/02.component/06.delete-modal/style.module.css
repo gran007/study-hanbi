@@ -1,28 +1,16 @@
-.moreButton {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.moreButton:hover {
-    background: var(--button-modal-hover-color);
-}
-
-.settingModal {
+.deleteModal {
     display: none;
     position: absolute;
     background: white;
     z-index: 100;
-    transform: translate(-100px, 46px);
+    /* transform: translate(-16x, 36px); */
     flex-direction: column;
     border-radius: 8px;
     padding-block: 8px;
     border: solid 1px rgb(196, 178, 195);
     box-shadow: 2px 2px 8px var(--box-shadow-color);
+    right: 0px;
+    bottom: -68px;
 }
 
 .show {
@@ -33,13 +21,10 @@
     padding: 8px 16px;
     display: flex;
     user-select: none;
+    color: var(--delete-button-color);
     cursor: pointer;
 }
 
 .button:hover {
     background: var(--button-modal-hover-color);
-}
-
-.delete {
-    color: var(--delete-button-color);
 }
