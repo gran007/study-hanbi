@@ -1,0 +1,7 @@
+### 리프레시 토큰 체크 및 재발급
+POST {{domain}}/user/refresh
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJKaXJhVG9kb0xpc3QiLCJuYW1lIjoiSm9uZ0h3YSBMZWUiLCJlbWFpbCI6ImdyYW4wMDNAZ21haWwuY29tIiwidXNlcklkIjoxNCwiaWF0IjoxNzU1MTU4NjU1LCJleHAiOjE3NTU3NjM0NTV9.x8BP6WokMaxIUZwXHf5TLLzqcTmsnqlVlLSTXwTkQe0"
+}

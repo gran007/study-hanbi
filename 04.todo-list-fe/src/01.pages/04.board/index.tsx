@@ -28,7 +28,7 @@ export default function Board() {
     if (error) return (<Error error={error} />)
 
     const result = data?.data || [];
-    
+    console.log(result);
     const onDeleteEvent = (project: BoardDto) => {
         open({
             title: '삭제',
@@ -48,7 +48,7 @@ export default function Board() {
         <>
             <Loading isLoading={isLoading} />
             <div className={style.body}>
-                
+
             </div>
         </>
     )

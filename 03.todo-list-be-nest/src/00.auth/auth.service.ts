@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from "@nestjs/jwt";
 import { UserEntity } from 'src/01.user/entities/user.entity';
 
@@ -19,10 +19,7 @@ export interface GoogleUser {
 
 @Injectable()
 export class AuthService {
-  constructor(
-    private readonly jwtService: JwtService,
-    // private readonly configService: ConfigService
-  ) { }
+  constructor(private readonly jwtService: JwtService) { }
 
   getToken(user: UserEntity) {
     
@@ -44,5 +41,11 @@ export class AuthService {
     });
 
     return { accessToken, refreshToken };
+  }
+
+  async verifyRefreshToken(refreshToken: string) {
+    return this.jwtService.verify(refreshToken, {
+      secret: process.env.JWT_SECRET_REFRESH_TOKEN_KEY
+    });
   }
 }

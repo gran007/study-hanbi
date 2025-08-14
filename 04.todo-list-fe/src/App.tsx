@@ -1,6 +1,6 @@
 import './App.css'
 import { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { Project, Login, Auth } from './01.pages'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -11,21 +11,32 @@ const queryClient = new QueryClient();
 
 function App() {
   const [load, setLoad] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    
+
     const { pathname } = window.location;
     if (!pathname.includes('/login') && !pathname.includes('/auth')) {
       const accessToken = localStorage.getItem('accessToken');
-      if (accessToken) {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+      const refreshToken = localStorage.getItem('refreshToken');
+      if (accessToken && refreshToken) {
+        axios.post('/user/refresh', { refreshToken }).then((response) => {
+          const { accessToken, refreshToken } = response.data;
+          localStorage.setItem('accessToken', accessToken);
+          localStorage.setItem('refreshToken', refreshToken);
+          axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+        }).catch(() => {
+          navigate('/login');
+        })
+          .finally(() => {
+            setLoad(true);
+          })
       } else {
-        window.location.href = `${window.location.origin}/login`;
+        navigate('/login');
+        setLoad(true);
       }
     }
-
-    setLoad(true);
-  }, [])
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
