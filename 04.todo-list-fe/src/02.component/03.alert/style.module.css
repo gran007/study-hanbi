@@ -54,3 +54,8 @@
 .button:hover {
     background-color: var(--button-hover-color);
 }
+
+.cancel {
+    border: solid 2px var(--cancel-button-color);
+    color: var(--cancel-button-color);
+}

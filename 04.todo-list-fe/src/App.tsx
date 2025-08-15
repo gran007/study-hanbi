@@ -18,21 +18,25 @@ function App() {
 
     const { pathname } = window.location;
     if (!pathname.includes('/login') && !pathname.includes('/auth')) {
+      
       const accessToken = localStorage.getItem('accessToken');
       const refreshToken = localStorage.getItem('refreshToken');
+      
       if (accessToken && refreshToken) {
         axios.post('/user/refresh', { refreshToken }).then((response) => {
           const { accessToken, refreshToken } = response.data;
           localStorage.setItem('accessToken', accessToken);
           localStorage.setItem('refreshToken', refreshToken);
           axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-        }).catch(() => {
+        }).catch((e) => {
+          console.log(e);
           navigate('/login');
         })
-          .finally(() => {
-            setLoad(true);
-          })
+        .finally(() => {
+          setLoad(true);
+        })
       } else {
+        console.log('send to login')
         navigate('/login');
         setLoad(true);
       }

@@ -24,14 +24,14 @@ interface DeleteBoardDto {
 
 export function useBoardListQuery(projectId: number) {
   return useQuery({
-    queryKey: ['board', 'list', projectId],
+    queryKey: ['board', 'list'],
     queryFn: async () => {
       return await axios.get(`/board/project/${projectId}`);
     },
   });
 };
 
-export function useAddBoardQuery(projectId: number, clear: Function) {
+export function useAddBoardQuery(clear: Function) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (dto: CreateBoardDto) => {
@@ -39,14 +39,14 @@ export function useAddBoardQuery(projectId: number, clear: Function) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['board', 'list', projectId],
+        queryKey: ['board', 'list'],
       });
       clear();
     }
   });
 };
 
-export function useUpdateBoardQuery(projectId: number, clear: Function) {
+export function useUpdateBoardQuery(clear: Function) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (dto: UpdateBoardDto) => {
@@ -54,14 +54,14 @@ export function useUpdateBoardQuery(projectId: number, clear: Function) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['board', 'list', projectId],
+        queryKey: ['board', 'list'],
       });
       clear();
     }
   });
 };
 
-export function useUpdateBoardOrderQuery(projectId: number, clear: Function) {
+export function useUpdateBoardOrderQuery(clear: Function) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (dtoList: UpdateBoardOrder[]) => {
@@ -69,14 +69,14 @@ export function useUpdateBoardOrderQuery(projectId: number, clear: Function) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['board', 'list', projectId],
+        queryKey: ['board', 'list'],
       });
       clear();
     }
   });
 };
 
-export function useDeleteBoardQuery(projectId: number, clear: Function) {
+export function useDeleteBoardQuery(clear: Function) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (dto: DeleteBoardDto) => {
@@ -84,7 +84,7 @@ export function useDeleteBoardQuery(projectId: number, clear: Function) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['board', 'list', projectId],
+        queryKey: ['board', 'list'],
       });
       clear();
     }

@@ -49,7 +49,7 @@ export default function Project() {
                         deleteData.mutate({ id: project.id });
                     }
                 },
-                { name: '취소', onClick: () => { close() } },
+                { name: '취소', onClick: () => { close() }, isCancel: true },
             ]
         });
     }

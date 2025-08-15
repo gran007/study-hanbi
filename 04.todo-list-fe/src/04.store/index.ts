@@ -3,6 +3,7 @@ import { create } from 'zustand';
 export interface ButtonType {
     name: string;
     onClick: Function;
+    isCancel?: boolean;
 }
 
 interface State {

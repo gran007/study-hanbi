@@ -3,24 +3,26 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     /* justify-content: center; */
     background-image: linear-gradient(to bottom right in oklab, oklch(97% .014 254.604) 0%, oklch(98.5% .002 247.839) 100%);
     color: black;
-    padding-top: 32px;
-    padding-bottom: 32px;
+    padding: 64px;
 }
 
 .boardSection {
     min-width: 1280px;
     display: flex;
     align-items: center;
-    overflow-x: auto;
 }
 
 .boardBar {
     width: 4px;
     height: 100%;
+}
+
+.boardBar:hover {
+    background-color: var(--);
 }
 
 .board {
@@ -31,45 +33,6 @@
     margin-top: 16px;
     margin-right: 8px;
     height: -webkit-fill-available;
-}
-
-.task {
-    width: -webkit-fill-available;
-    background-color: white;
-    border: solid 1px var(--table-border-color);
-    padding: 16px;
-    display: flex;
-    justify-content: space-between;
-    box-shadow: 4px 4px 16px var(--box-shadow-color);
-    border-radius: 8px;
-}
-
-.task:hover {
-    background-color: var(--task-card-hover-color);
-}
-
-.taskTitle {
-    display: flex;
-}
-
-.taskName {
-    font-size: 18px;
-    font-weight: 600;
-}
-
-.taskBar {
-    width: 100%;
-    height: 4px;
-}
-
-.taskBar:hover {
-    background-color: rgb(73, 73, 156);
-}
-
-.taskAddLine {
-    width: 100%;
-    height: 1px;
-    background: var(--board-color);
 }
 
 .addTaskButtonSection {

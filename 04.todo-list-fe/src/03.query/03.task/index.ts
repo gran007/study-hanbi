@@ -12,8 +12,6 @@ interface CreateTaskDto {
 
 interface UpdateTaskDto {
   readonly id: number;
-  readonly boardId: number;
-  readonly priority: number;
   readonly name: string;
 }
 
@@ -21,6 +19,12 @@ interface UpdateTaskOrder {
   readonly id: number;
   readonly orderNo: number;
 }
+
+interface CreateAndUpdateTaskOrderDto {
+  task: CreateTaskDto,
+  taskList: UpdateTaskOrder[],
+}
+
 
 interface DeleteTaskDto {
   readonly id: number;
@@ -49,6 +53,23 @@ export function useAddTaskQuery(clear: Function) {
     }
   });
 };
+
+export function useAddAndUpdatTaskQuery(clear: Function) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (dto: CreateAndUpdateTaskOrderDto) => {
+      await axios.post('/task', dto.task);
+      await axios.patch('tast/order', dto.taskList);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['board', 'list'],
+      });
+      clear();
+    }
+  });
+};
+
 
 export function useUpdateTaskQuery(clear: Function) {
   const queryClient = useQueryClient();
@@ -80,7 +101,7 @@ export function useUpdateTaskOrderQuery(clear: Function) {
   });
 };
 
-export function useDeleteTaskQuery(boardId: number, clear: Function) {
+export function useDeleteTaskQuery(clear: Function) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (dto: DeleteTaskDto) => {
@@ -88,7 +109,7 @@ export function useDeleteTaskQuery(boardId: number, clear: Function) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['task', 'list', boardId],
+        queryKey: ['board', 'list'],
       });
       clear();
     }

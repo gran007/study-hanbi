@@ -1,7 +1,5 @@
 import style from './style.module.css'
-import { useState } from "react";
 import { ClickCancel } from '@/02.component';
-import MoreHoriz from '@mui/icons-material/MoreHoriz'
 
 
 interface DeleteType {

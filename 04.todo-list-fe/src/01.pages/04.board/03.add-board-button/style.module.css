@@ -1,0 +1,22 @@
+.addBoardButtonSection {
+    padding: 16px 8px;
+    width: 270px;
+    height: -webkit-fill-available;
+}
+
+.addBoardButton {
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.addBoardButton:hover {
+    background-color: var(--deep-board-color);
+}
