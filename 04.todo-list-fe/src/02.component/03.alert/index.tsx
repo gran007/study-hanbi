@@ -14,8 +14,8 @@ export default function Alert() {
                 <div className={style.title}>{title}</div>
                 <div className={style.body}>{body}</div>
                 <div className={style.buttonGroup}>
-                    {buttons?.map((item: ButtonType) => (
-                        <div onClick={() => item.onClick()} className={`${style.button} ${item.isCancel && style.cancel}`}>{item.name}</div>
+                    {buttons?.map((item: ButtonType, index: number) => (
+                        <div key={index} onClick={() => item.onClick()} className={`${style.button} ${item.isCancel && style.cancel}`}>{item.name}</div>
                     ))}
                 </div>
             </ClickCancel>

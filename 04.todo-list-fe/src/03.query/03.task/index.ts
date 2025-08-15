@@ -15,29 +15,25 @@ interface UpdateTaskDto {
   readonly name: string;
 }
 
+
 interface UpdateTaskOrder {
   readonly id: number;
   readonly orderNo: number;
 }
 
 interface CreateAndUpdateTaskOrderDto {
-  task: CreateTaskDto,
-  taskList: UpdateTaskOrder[],
+  task: CreateTaskDto;
+  taskList: UpdateTaskOrder[];
 }
-
 
 interface DeleteTaskDto {
   readonly id: number;
 }
 
-// export function useTaskListQuery(boardId: number) {
-//   return useQuery({
-//     queryKey: ['task', 'list', boardId],
-//     queryFn: async () => {
-//       return await axios.get(`/task/board/${boardId}`);
-//     },
-//   });
-// };
+interface DeleteAndUpdateOrderDto {
+  task: DeleteTaskDto;
+  taskList: UpdateTaskOrder[];
+}
 
 export function useAddTaskQuery(clear: Function) {
   const queryClient = useQueryClient();
@@ -59,7 +55,7 @@ export function useAddAndUpdatTaskQuery(clear: Function) {
   return useMutation({
     mutationFn: async (dto: CreateAndUpdateTaskOrderDto) => {
       await axios.post('/task', dto.task);
-      await axios.patch('tast/order', dto.taskList);
+      await axios.patch('task/order', dto.taskList);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -104,8 +100,9 @@ export function useUpdateTaskOrderQuery(clear: Function) {
 export function useDeleteTaskQuery(clear: Function) {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (dto: DeleteTaskDto) => {
-      return await axios.delete('/task', { data: dto })
+    mutationFn: async (dto: DeleteAndUpdateOrderDto) => {
+      await axios.delete('/task', { data: dto.task });
+      await axios.patch('/task/order', dto.taskList);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({

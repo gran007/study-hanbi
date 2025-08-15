@@ -34,7 +34,7 @@ export default function TaskBar({ index, board }: TaskBarProps) {
                 .filter((task)=>task.orderNo >= index)
                 .map((task)=>{
                     return {
-                        ...task,
+                        id: task.id,
                         orderNo: task.orderNo + 1,
                     }
                 })

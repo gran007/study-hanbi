@@ -22,6 +22,11 @@ interface DeleteBoardDto {
   readonly id: number;
 }
 
+interface DeleteAndUpdateOrderDto {
+  board: DeleteBoardDto;
+  boardList: UpdateBoardOrder[];
+}
+
 export function useBoardListQuery(projectId: number) {
   return useQuery({
     queryKey: ['board', 'list'],
@@ -79,8 +84,9 @@ export function useUpdateBoardOrderQuery(clear: Function) {
 export function useDeleteBoardQuery(clear: Function) {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (dto: DeleteBoardDto) => {
-      return await axios.delete('/board', { data: dto })
+    mutationFn: async (dto: DeleteAndUpdateOrderDto) => {
+      await axios.delete('/board', { data: dto.board });
+      await axios.patch('/board/order', dto.boardList);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({

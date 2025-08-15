@@ -6,7 +6,12 @@ import { ClickCancel, DeleteModal } from '@/02.component';
 import { useUpdateBoardQuery, useDeleteBoardQuery } from '03.query/02.board'
 import { alertStore } from '@/04.store';
 
-export default function BoardTitle({ board }: { board: BoardDto }) {
+interface BoardTitleProps {
+    board: BoardDto;
+    boardList: BoardDto[];
+}
+
+export default function BoardTitle({ board, boardList }: BoardTitleProps) {
 
     const [select, setSelect] = useState(false);
     const [name, setName] = useState(board.name);
@@ -37,7 +42,18 @@ export default function BoardTitle({ board }: { board: BoardDto }) {
             buttons: [
                 {
                     name: '확인', onClick: () => {
-                        deleteData.mutate({ id: board.id });
+                        deleteData.mutate({ 
+                            board: {id: board.id},
+                            boardList: boardList
+                            .filter((boardOrder)=>boardOrder.id != board.id)
+                            .map((boardOrder)=> {
+                                const { id, orderNo } = boardOrder;
+                                return {
+                                    id,
+                                    orderNo: orderNo > board.orderNo ? orderNo - 1 : orderNo
+                                }
+                            })
+                        });
                     }
                 },
                 { name: '취소', onClick: () => { close() }, isCancel: true },

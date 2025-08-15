@@ -46,26 +46,30 @@ export default function Board() {
             <Loading isLoading={isLoading} />
             <div className={style.body}>
                 <div className={style.boardSection}>
-                    {result.sort((a, b)=>a.orderNo - b.orderNo).map((board: BoardDto, boardKey: number) => {
-                        return (
-                            <Fragment key={boardKey}>
-                                <div className={style.boardBar}></div>
-                                <div className={style.board}>
-                                    <BoardTitle board={board} />
-                                    {
-                                        board.tasks.sort((a, b)=>a.orderNo - b.orderNo).map((task: TaskDto, taskKey: number) => (
-                                            <Fragment key={taskKey}>
-                                                <TaskBar index={boardKey} board={board} />
-                                                <TaskCard task={task} />
-                                            </Fragment>
-                                        ))
-                                    }
-                                    <div className={style.taskBottomBar}></div>
-                                    <AddTaskButton board={board} />
-                                </div>
-                            </Fragment>
-                        )
-                    })}
+                    {result
+                        .sort((a, b) => a.orderNo - b.orderNo)
+                        .map((board: BoardDto, boardKey: number) => {
+                            return (
+                                <Fragment key={boardKey}>
+                                    <div className={style.boardBar}></div>
+                                    <div className={style.board}>
+                                        <BoardTitle board={board} boardList={result} />
+                                        {
+                                            board.tasks
+                                                .sort((a, b) => a.orderNo - b.orderNo)
+                                                .map((task: TaskDto, taskKey: number) => (
+                                                    <Fragment key={taskKey}>
+                                                        <TaskBar index={taskKey} board={board} />
+                                                        <TaskCard task={task} board={board} />
+                                                    </Fragment>
+                                                ))
+                                        }
+                                        <div className={style.taskBottomBar}></div>
+                                        <AddTaskButton board={board} />
+                                    </div>
+                                </Fragment>
+                            )
+                        })}
                     <div className={style.boardRightBar}></div>
                     <AddBoardButton projectId={projectId} orderNo={result.length} />
                 </div>

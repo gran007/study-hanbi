@@ -1,13 +1,18 @@
 import style from './style.module.css'
 import { useState, useEffect, type KeyboardEvent } from 'react'
-import type { TaskDto } from '../'
+import type { TaskDto, BoardDto } from '../'
 import MoreHoriz from '@mui/icons-material/MoreHoriz';
 import Edit from '@mui/icons-material/Edit';
 import { ClickCancel, DeleteModal } from '@/02.component';
 import { useUpdateTaskQuery, useDeleteTaskQuery } from '03.query/03.task'
 import { alertStore } from '@/04.store';
 
-export default function TaskCard({ task }: { task: TaskDto }) {
+interface TaskCardProps {
+    task: TaskDto,
+    board: BoardDto,
+}
+
+export default function TaskCard({ task, board }: TaskCardProps) {
 
     const [select, setSelect] = useState(false);
     const [name, setName] = useState(task.name);
@@ -38,7 +43,18 @@ export default function TaskCard({ task }: { task: TaskDto }) {
             buttons: [
                 {
                     name: '확인', onClick: () => {
-                        deleteData.mutate({ id: task.id });
+                        deleteData.mutate({ 
+                            task: { id: task.id },
+                            taskList: board.tasks
+                            .filter((taskOrder)=>taskOrder.id != task.id)
+                            .map((taskOrder)=> {
+                                const { id, orderNo } = taskOrder;
+                                return {
+                                    id,
+                                    orderNo: orderNo > task.orderNo ? orderNo - 1 : orderNo
+                                };
+                            })
+                        });
                     }
                 },
                 { name: '취소', onClick: () => { close() }, isCancel: true },
