@@ -4,9 +4,9 @@ import { useBoardListQuery } from '@/03.query/02.board';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Error, Loading } from '@/02.component';
 import { Fragment } from 'react';
-import AddTaskButton from './02.add-task-button';
 import BoardTitle from './01.board-title';
-import AddBoardButton from './03.add-board-button';
+import AddBoardButton from './02.add-board-button';
+import AddTaskButton from './03.add-task-button';
 import TaskCard from './04.task-card';
 import TaskBar from './05.task-bar';
 

@@ -1,5 +1,5 @@
 import style from '../style.module.css'
-import { useState, useEffect, useRef, type KeyboardEvent } from "react";
+import { useState, useEffect, type KeyboardEvent } from "react";
 import Add from '@mui/icons-material/Add';
 import { ClickCancel } from '@/02.component';
 import { useAddTaskQuery } from '@/03.query/03.task';

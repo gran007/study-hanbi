@@ -1,6 +1,6 @@
 import style from './style.module.css'
 import { useState, useEffect, type KeyboardEvent } from 'react'
-import type { TaskDto, BoardDto } from '../'
+import type { TaskDto, BoardDto } from '..'
 import MoreHoriz from '@mui/icons-material/MoreHoriz';
 import Edit from '@mui/icons-material/Edit';
 import { ClickCancel, DeleteModal } from '@/02.component';
@@ -66,7 +66,7 @@ export default function TaskCard({ task, board }: TaskCardProps) {
         <div className={style.task}>
             {
                 !select ?
-                    (<div className={style.taskTitle}>
+                    (<div  className={style.taskTitle}>
                         <div className={style.taskName}>
                             {task.name}
                             <div onClick={() => setSelect(true)} className={style.edit}>

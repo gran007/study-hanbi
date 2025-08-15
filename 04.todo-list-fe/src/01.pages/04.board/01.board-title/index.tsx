@@ -1,6 +1,6 @@
 import style from './style.module.css'
 import { useState, useEffect, type KeyboardEvent } from 'react'
-import type { BoardDto } from '../'
+import type { BoardDto } from '..'
 import MoreHoriz from '@mui/icons-material/MoreHoriz';
 import { ClickCancel, DeleteModal } from '@/02.component';
 import { useUpdateBoardQuery, useDeleteBoardQuery } from '03.query/02.board'
