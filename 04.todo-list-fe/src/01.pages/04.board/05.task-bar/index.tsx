@@ -21,7 +21,7 @@ export default function TaskBar({ index, board }: TaskBarProps) {
     }, [select]);
 
     const onKeyDown = (e: KeyboardEvent) => {
-        if (name.length > 0 && e.key === 'Enter') {
+        if (name.length > 0 && e.key === 'Enter' && !e.nativeEvent.isComposing) {
             updateData.mutate({
                 task: {
                     projectId: board.projectId,

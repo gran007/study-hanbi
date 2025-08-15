@@ -20,7 +20,7 @@ export default function AddTaskButton({ board }: { board: BoardDto }) {
 
         if (e.key === 'Escape') {
             setSelect(false);
-        } else if (name.length > 0 && e.key === 'Enter') {
+        } else if (name.length > 0 && e.key === 'Enter' && !e.nativeEvent.isComposing) {
             addTask.mutate({
                 projectId: board.projectId,
                 boardId: board.id,

@@ -23,7 +23,7 @@ export default function BoardTitle({ board, boardList }: BoardTitleProps) {
     }, [select]);
 
     const onKeyDown = (e: KeyboardEvent) => {
-        if (name.length > 0 && e.key === 'Enter') {
+        if (name.length > 0 && e.key === 'Enter' && !e.nativeEvent.isComposing) {
             updateData.mutate({
                 id: board.id,
                 name

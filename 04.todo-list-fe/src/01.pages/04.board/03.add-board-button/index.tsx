@@ -24,7 +24,7 @@ export default function AddBoardButton({ projectId, orderNo }: BoardInfo) {
     const onKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'Escape') {
             setSelect(false);
-        } else if (name.length > 0 && e.key === 'Enter') {
+        } else if (name.length > 0 && e.key === 'Enter' && !e.nativeEvent.isComposing) {
             addBoard.mutate({
                 projectId,
                 orderNo,

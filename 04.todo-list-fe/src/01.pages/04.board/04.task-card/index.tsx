@@ -24,7 +24,7 @@ export default function TaskCard({ task, board }: TaskCardProps) {
     }, [select]);
 
     const onKeyDown = (e: KeyboardEvent) => {
-        if (name.length > 0 && e.key === 'Enter') {
+        if (name.length > 0 && e.key === 'Enter' && !e.nativeEvent.isComposing) {
             updateData.mutate({
                 id: task.id,
                 name
