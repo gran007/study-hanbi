@@ -1,31 +1,16 @@
 import style from './style.module.css';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useBoardListQuery } from '@/03.query/02.board';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Error, Loading } from '@/02.component';
 import { Fragment } from 'react';
+import type { BoardDto, TaskDto } from './types';
 import BoardTitle from './01.board-title';
 import AddBoardButton from './02.add-board-button';
 import AddTaskButton from './03.add-task-button';
 import TaskCard from './04.task-card';
 import TaskBar from './05.task-bar';
-
-export interface TaskDto {
-    id: number;
-    projectId: number;
-    boardId: number;
-    priority: number;
-    orderNo: number;
-    name: string;
-}
-
-export interface BoardDto {
-    id: number;
-    projectId: number;
-    name: string;
-    orderNo: number;
-    tasks: TaskDto[];
-}
+import TaskModal from './06.task-modal';
 
 export default function Board() {
     const navigate = useNavigate();
@@ -34,12 +19,28 @@ export default function Board() {
         navigate(-1);
     }
 
+    const [boardIndex, setBoardIndex] = useState(-1);
+    const [taskIndex, setTaskIndex] = useState(-1);
+    const [showModal, setShowModal] = useState<boolean>(false);
     const [projectId] = useState(parseInt(id as string));
     const { isLoading, error, data } = useBoardListQuery(projectId);
 
     if (error) return (<Error error={error} />)
 
     const result: BoardDto[] = data?.data || [];
+
+    const onClickTaskCard = (boardIndex: number, taskIndex: number) => {
+        setBoardIndex(boardIndex);
+        setTaskIndex(taskIndex);
+        setShowModal(true);
+    }
+
+    useEffect(() => {
+        if (!showModal) {
+            setBoardIndex(-1);
+            setTaskIndex(-1);
+        }
+    }, [showModal]);
 
     return (
         <>
@@ -60,7 +61,10 @@ export default function Board() {
                                                 .map((task: TaskDto, taskKey: number) => (
                                                     <Fragment key={taskKey}>
                                                         <TaskBar index={taskKey} board={board} />
-                                                        <TaskCard task={task} board={board} />
+                                                        <TaskCard
+                                                            onClick={() => onClickTaskCard(boardKey, taskKey)}
+                                                            task={task}
+                                                            board={board} />
                                                     </Fragment>
                                                 ))
                                         }
@@ -74,6 +78,12 @@ export default function Board() {
                     <AddBoardButton projectId={projectId} orderNo={result.length} />
                 </div>
             </div>
+            <TaskModal
+                show={showModal}
+                setShow={setShowModal}
+                task={
+                    boardIndex >= 0 && taskIndex >= 0 ?
+                        result[boardIndex].tasks[taskIndex] : null} />
         </>
     )
 }

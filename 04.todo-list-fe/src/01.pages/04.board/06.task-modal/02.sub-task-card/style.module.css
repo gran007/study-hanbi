@@ -1,0 +1,50 @@
+.task {
+    width: -webkit-fill-available;
+    background-color: white;
+    border: solid 1px var(--table-border-color);
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 4px 4px 16px var(--box-shadow-color);
+    border-radius: 8px;
+    margin: 16px 8px;
+}
+
+.task:hover {
+    background-color: var(--task-card-hover-color);
+}
+
+.taskTitle {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    flex: 1;
+    cursor: pointer;
+}
+
+.taskName {
+    display: flex;
+    font-size: 18px;
+    font-weight: 600;
+    flex: 1;
+    align-items: center;
+}
+
+.taskButton {
+    padding: 8px;
+    border-radius: 8px;    
+}
+
+.taskButton:hover {
+    background-color: var(--deep-board-color);
+}
+
+.input {
+    background-color: white;
+    color: black;
+    font-size: 18px;
+    padding: 8px;
+    border-radius: 4px;
+    border: solid 1px gray;
+    width: 100%;
+}

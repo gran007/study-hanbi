@@ -1,0 +1,29 @@
+.modalBackground {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .2);
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+}
+
+.show {
+    display: flex;
+}
+
+.modal {
+    background-color: white;
+    font-size: 18px;
+    border-radius: 16px;
+    min-width: 840px;
+    height: 80vh;
+    overflow: hidden;
+}
+
+.body {
+    margin-top: 48px;
+    padding: 24px;
+    overflow-y: auto;
+    height: calc(80vh - 48px);
+}

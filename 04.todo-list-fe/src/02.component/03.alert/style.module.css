@@ -5,6 +5,7 @@
     background: rgba(0, 0, 0, .2);
     align-items: center;
     justify-content: center;
+    z-index: 30;
 }
 
 .show {

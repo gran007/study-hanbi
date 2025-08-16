@@ -1,40 +1,38 @@
 import style from './style.module.css'
 import { useState, useEffect, type KeyboardEvent } from 'react'
-import type { TaskDto, BoardDto } from '../types'
+import type { SubTaskDto } from '../../types'
 import MoreHoriz from '@mui/icons-material/MoreHoriz';
-import Edit from '@mui/icons-material/Edit';
 import { ClickCancel, DeleteModal } from '@/02.component';
-import { useUpdateTaskQuery, useDeleteTaskQuery } from '03.query/03.task'
+import { useUpdateSubTaskQuery, useDeleteSubTaskQuery } from '03.query/04.sub-task'
 import { alertStore } from '@/04.store';
 
 interface TaskCardProps {
-    task: TaskDto;
-    board: BoardDto;
-    onClick: Function;
+    subTask: SubTaskDto,
+    subTaskList: SubTaskDto[],
 }
 
-export default function TaskCard({ task, board, onClick }: TaskCardProps) {
+export default function SubTaskCard({ subTask, subTaskList }: TaskCardProps) {
 
     const [select, setSelect] = useState(false);
-    const [name, setName] = useState(task.name);
-    const updateData = useUpdateTaskQuery(() => setSelect(false));
+    const [name, setName] = useState(subTask.name);
+    const updateData = useUpdateSubTaskQuery(() => setSelect(false));
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
     useEffect(() => {
-        setName(task.name);
+        setName(subTask.name);
     }, [select]);
 
     const onKeyDown = (e: KeyboardEvent) => {
         if (name.length > 0 && e.key === 'Enter' && !e.nativeEvent.isComposing) {
             updateData.mutate({
-                id: task.id,
+                id: subTask.id,
                 name
             });
         }
     }
 
     const { open, close } = alertStore();
-    const deleteData = useDeleteTaskQuery(() => close());
+    const deleteData = useDeleteSubTaskQuery(() => close());
 
     const onDeleteEvent = () => {
         setShowDeleteModal(false);
@@ -44,17 +42,17 @@ export default function TaskCard({ task, board, onClick }: TaskCardProps) {
             buttons: [
                 {
                     name: '확인', onClick: () => {
-                        deleteData.mutate({
-                            task: { id: task.id },
-                            taskList: board.tasks
-                                .filter((taskOrder) => taskOrder.id != task.id)
-                                .map((taskOrder) => {
-                                    const { id, orderNo } = taskOrder;
-                                    return {
-                                        id,
-                                        orderNo: orderNo > task.orderNo ? orderNo - 1 : orderNo
-                                    };
-                                })
+                        deleteData.mutate({ 
+                            subTask: { id: subTask.id },
+                            subTaskList: subTaskList
+                            .filter((order)=>order.id != subTask.id)
+                            .map((order)=> {
+                                const { id, orderNo } = order;
+                                return {
+                                    id,
+                                    orderNo: orderNo > subTask.orderNo ? orderNo - 1 : orderNo
+                                };
+                            })
                         });
                     }
                 },
@@ -67,20 +65,11 @@ export default function TaskCard({ task, board, onClick }: TaskCardProps) {
         <div className={style.task}>
             {
                 !select ?
-                    (<div onClick={() => onClick()} className={style.taskTitle}>
-                        <div className={style.taskName}>
-                            {task.name}
-                            <div onClick={(e) => {
-                                e.stopPropagation();
-                                setSelect(true);
-                            }} className={style.edit}>
-                                <Edit sx={{ color: "#807d7dff", fontSize: '18px' }} />
-                            </div>
+                    (<div  className={style.taskTitle}>
+                        <div onClick={() => setSelect(true)} className={style.taskName}>
+                            {subTask.name}
                         </div>
-                        <div onClick={(e) => {
-                            e.stopPropagation();
-                            setShowDeleteModal(true);
-                        }} className={style.taskButton}>
+                        <div onClick={() => setShowDeleteModal(true)} className={style.taskButton}>
                             <MoreHoriz sx={{ color: "#807d7dff" }} />
                         </div>
                         <DeleteModal

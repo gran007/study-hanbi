@@ -14,7 +14,10 @@ export default function DeleteModal({ show, setShow, onDelete }: DeleteType) {
         <ClickCancel
             setCancel={() => setShow(false)}
             className={`${style.deleteModal} ${show && style.show}`}>
-            <div onClick={() => onDelete()}
+            <div onClick={(e) => {
+                e.stopPropagation();
+                onDelete();
+            }}
                 className={style.button}>삭제</div>
         </ClickCancel>
     )

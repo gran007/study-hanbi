@@ -1,6 +1,6 @@
 import style from './style.module.css'
 import { useState, useEffect, type KeyboardEvent } from 'react'
-import type { BoardDto, TaskDto } from '..'
+import type { BoardDto } from '../types'
 import Add from '@mui/icons-material/Add';
 import { ClickCancel } from '@/02.component';
 import { useAddAndUpdatTaskQuery } from '03.query/03.task'

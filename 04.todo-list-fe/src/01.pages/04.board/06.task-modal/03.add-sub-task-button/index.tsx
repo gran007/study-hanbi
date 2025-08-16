@@ -1,11 +1,11 @@
-import style from '../style.module.css'
+import style from './style.module.css'
 import { useState, useEffect, type KeyboardEvent } from "react";
 import Add from '@mui/icons-material/Add';
 import { ClickCancel } from '@/02.component';
-import { useAddTaskQuery } from '@/03.query/03.task';
-import type { BoardDto } from '../types'
+import { useAddSubTaskQuery } from '@/03.query/04.sub-task';
+import type { TaskDto, SubTaskDto } from '../../types'
 
-export default function AddTaskButton({ board }: { board: BoardDto }) {
+export default function AddSubTaskButton({ task, subTasks }: { task: TaskDto, subTasks: SubTaskDto[] }) {
     const [select, setSelect] = useState(false);
     const [name, setName] = useState('');
 
@@ -15,28 +15,27 @@ export default function AddTaskButton({ board }: { board: BoardDto }) {
         }
     }, [select]);
 
-    const addTask = useAddTaskQuery(() => setSelect(false));
+    const addSubTask = useAddSubTaskQuery(() => setSelect(false));
     const onKeyDown = (e: KeyboardEvent) => {
 
         if (e.key === 'Escape') {
             setSelect(false);
         } else if (name.length > 0 && e.key === 'Enter' && !e.nativeEvent.isComposing) {
-            addTask.mutate({
-                projectId: board.projectId,
-                boardId: board.id,
+            addSubTask.mutate({
+                projectId: task.projectId,
+                taskId: task.id,
                 priority: 2,
-                orderNo: board.tasks.length,
+                orderNo: subTasks.length,
                 name,
             })
         }
     }
 
     return (
-        <div className={style.addTaskButtonSection}>
+        <div className={style.addSubTaskButtonSection}>
             {!select ?
-                (<div onClick={() => setSelect(true)} className={style.addTaskButton}>
+                (<div onClick={() => setSelect(true)} className={style.addSubTaskButton}>
                     <Add />
-                    <div className={style.addText}>만들기</div>
                 </div>) :
                 (
                     <ClickCancel setCancel={() => setSelect(false)}>

@@ -12,8 +12,6 @@ interface CreateSubTaskDto {
 
 interface UpdateSubTaskDto {
   readonly id: number;
-  readonly taskId: number;
-  readonly priority: number;
   readonly name: string;
 }
 
@@ -26,16 +24,21 @@ interface DeleteSubTaskDto {
   readonly id: number;
 }
 
+interface DeleteAndUpdateOrder {
+  subTask: DeleteSubTaskDto;
+  subTaskList: UpdateSubTaskOrder[];
+}
+
 export function useSubTaskListQuery(taskId: number) {
   return useQuery({
-    queryKey: ['sub-task', 'list', taskId],
+    queryKey: ['subTask', 'list'],
     queryFn: async () => {
-      return await axios.get(`/sub-task/board/${taskId}`);
+      return await axios.get(`/sub-task/task/${taskId}`);
     },
   });
 };
 
-export function useAddSubTaskQuery(taskId: number, clear: Function) {
+export function useAddSubTaskQuery(clear: Function) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (dto: CreateSubTaskDto) => {
@@ -43,14 +46,14 @@ export function useAddSubTaskQuery(taskId: number, clear: Function) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['sub-task', 'list', taskId],
+        queryKey: ['subTask', 'list'],
       });
       clear();
     }
   });
 };
 
-export function useUpdateSubTaskQuery(taskId: number, clear: Function) {
+export function useUpdateSubTaskQuery(clear: Function) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (dto: UpdateSubTaskDto) => {
@@ -58,37 +61,24 @@ export function useUpdateSubTaskQuery(taskId: number, clear: Function) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['sub-task', 'list', taskId],
+        queryKey: ['subTask', 'list'],
       });
       clear();
     }
   });
 };
 
-export function useUpdateSubTaskOrderQuery(taskId: number, clear: Function) {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async (dtoList: UpdateSubTaskOrder[]) => {
-      return await axios.patch('/sub-task/order', dtoList);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['sub-task', 'list', taskId],
-      });
-      clear();
-    }
-  });
-};
 
-export function useDeleteSubTaskQuery(taskId: number, clear: Function) {
+export function useDeleteSubTaskQuery(clear: Function) {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (dto: DeleteSubTaskDto) => {
-      return await axios.delete('/sub-task', { data: dto })
+    mutationFn: async (dto: DeleteAndUpdateOrder) => {
+      await axios.delete('/sub-task', { data: dto.subTask });
+      await axios.patch('/sub-task/order', dto.subTaskList);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['sub-task', 'list', taskId],
+        queryKey: ['subTask', 'list'],
       });
       clear();
     }

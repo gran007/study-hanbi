@@ -3,8 +3,6 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
-    /* justify-content: center; */
     background-image: linear-gradient(to bottom right in oklab, oklch(97% .014 254.604) 0%, oklch(98.5% .002 247.839) 100%);
     color: black;
     padding: 64px;

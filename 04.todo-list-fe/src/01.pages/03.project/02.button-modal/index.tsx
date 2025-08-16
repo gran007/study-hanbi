@@ -3,12 +3,12 @@ import { useState } from "react";
 import { ClickCancel } from '@/02.component';
 import MoreHoriz from '@mui/icons-material/MoreHoriz'
 
-interface clickEvent {
+interface ClickEvent {
     onUpdateEvent: Function;
     onDeleteEvent: Function;
 }
 
-export default function ButtonModal({ onUpdateEvent, onDeleteEvent }: clickEvent) {
+export default function ButtonModal({ onUpdateEvent, onDeleteEvent }: ClickEvent) {
 
     const [show, setShow] = useState<Boolean>(false);
 

@@ -19,7 +19,7 @@ export default function ClickCancel({ children, setCancel, className='' }: Props
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, []);
+    }, [inputRef.current]);
     return (
         <div ref={inputRef} className={className}>
             { children }

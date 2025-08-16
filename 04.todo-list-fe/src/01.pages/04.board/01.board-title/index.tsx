@@ -1,6 +1,6 @@
 import style from './style.module.css'
 import { useState, useEffect, type KeyboardEvent } from 'react'
-import type { BoardDto } from '..'
+import type { BoardDto } from '../types'
 import MoreHoriz from '@mui/icons-material/MoreHoriz';
 import { ClickCancel, DeleteModal } from '@/02.component';
 import { useUpdateBoardQuery, useDeleteBoardQuery } from '03.query/02.board'
@@ -45,9 +45,9 @@ export default function BoardTitle({ board, boardList }: BoardTitleProps) {
                         deleteData.mutate({ 
                             board: {id: board.id},
                             boardList: boardList
-                            .filter((boardOrder)=>boardOrder.id != board.id)
-                            .map((boardOrder)=> {
-                                const { id, orderNo } = boardOrder;
+                            .filter((order)=>order.id != board.id)
+                            .map((order)=> {
+                                const { id, orderNo } = order;
                                 return {
                                     id,
                                     orderNo: orderNo > board.orderNo ? orderNo - 1 : orderNo

@@ -1,0 +1,26 @@
+.addSubTaskButtonSection {
+    width: flex;
+    flex: 1;
+    margin: 16px 8px;
+}
+
+.addSubTaskButton {
+    padding: 8px 16px;
+    border-radius: 8px;
+    background-color: var(--board-color);
+    cursor: pointer;
+}
+
+.addSubTaskButton:hover {
+    background-color: var(--deep-board-color);
+}
+
+.input {
+    background-color: white;
+    color: black;
+    font-size: 18px;
+    padding: 8px;
+    border-radius: 4px;
+    border: solid 1px gray;
+    width: 100%;
+}
